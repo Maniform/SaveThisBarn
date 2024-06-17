@@ -10,5 +10,8 @@ func _ready():
 func _process(delta):
 	pass
 
+func set_apple_state(is_good: bool):
+	frame = !is_good
+
 func change():
-	frame = randf() < bad_apple_rate
+	set_apple_state(randf() > bad_apple_rate)
