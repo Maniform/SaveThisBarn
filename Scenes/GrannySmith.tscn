@@ -1,0 +1,50 @@
+[gd_scene load_steps=10 format=3 uid="uid://bmijdxt1hk5vr"]
+
+[ext_resource type="SpriteFrames" uid="uid://btfhxsa6yxn15" path="res://Sprites/GrannySmith/GS.tres" id="1_mbrwe"]
+[ext_resource type="Script" path="res://Sprites/GrannySmith/GrannySmith.gd" id="2_mg3uy"]
+[ext_resource type="AudioStream" uid="uid://dpt8pqeviu524" path="res://Sounds/GrannySmith/GS_Good_en.wav" id="3_305wk"]
+[ext_resource type="AudioStream" uid="uid://sfbc8v7n8yoi" path="res://Sounds/GrannySmith/GS_Bad_en.wav" id="4_0h7t7"]
+[ext_resource type="SpriteFrames" uid="uid://bw50vlerqq2gl" path="res://Sprites/AppleSpawner/Apples.tres" id="5_ahv7m"]
+[ext_resource type="Script" path="res://Scripts/AnimatedSprite2DViewportScaler.gd" id="5_ufwh4"]
+[ext_resource type="Script" path="res://Sprites/AppleSpawner/AppleSpawner.gd" id="6_hf5ga"]
+[ext_resource type="Shape2D" uid="uid://bihrgctlsn5ex" path="res://TouchControl/MidScreenTouchRect.tres" id="8_7h2g3"]
+[ext_resource type="Script" path="res://TouchControl/TouchScreenButton.gd" id="9_6yjfh"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="GrannySmith" type="AnimatedSprite2D" parent="Camera2D"]
+sprite_frames = ExtResource("1_mbrwe")
+animation = &"Idle"
+script = ExtResource("2_mg3uy")
+good_sound = ExtResource("3_305wk")
+bad_sound = ExtResource("4_0h7t7")
+
+[node name="AnimatedSprite2DViewportScaler" type="Node2D" parent="Camera2D/GrannySmith"]
+script = ExtResource("5_ufwh4")
+
+[node name="AppleSpawner" type="AnimatedSprite2D" parent="Camera2D/GrannySmith"]
+position = Vector2(-5, 401)
+scale = Vector2(0.49, 0.49)
+sprite_frames = ExtResource("5_ahv7m")
+script = ExtResource("6_hf5ga")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Camera2D/GrannySmith"]
+bus = &"Effects"
+
+[node name="HalfScreenButtonLeft" type="TouchScreenButton" parent="."]
+position = Vector2(-480, 0)
+shape = ExtResource("8_7h2g3")
+script = ExtResource("9_6yjfh")
+
+[node name="HalfScreenButtonRight" type="TouchScreenButton" parent="."]
+position = Vector2(480, 0)
+shape = ExtResource("8_7h2g3")
+script = ExtResource("9_6yjfh")
+emit_value = 1
+
+[connection signal="animation_finished" from="Camera2D/GrannySmith" to="Camera2D/GrannySmith" method="_on_animation_finished"]
+[connection signal="apple_thrown" from="Camera2D/GrannySmith" to="Camera2D/GrannySmith/AppleSpawner" method="change"]
+[connection signal="pressed_direction" from="HalfScreenButtonLeft" to="Camera2D/GrannySmith" method="select_apple"]
+[connection signal="pressed_direction" from="HalfScreenButtonRight" to="Camera2D/GrannySmith" method="select_apple"]

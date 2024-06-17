@@ -1,0 +1,47 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Save This Barn"
+run/main_scene="res://Scenes/MainMenu.tscn"
+config/features=PackedStringArray("4.2", "GL Compatibility")
+config/icon="res://Sprites/MainMenu/Icon.png"
+
+[autoload]
+
+main_music="*res://Singletons/MainMusic.gd"
+player_controller="*res://Singletons/PlayerController.gd"
+game_config="*res://Singletons/GameConfig.gd"
+
+[input]
+
+ui_toggle_fullscreen={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":true,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194309,"key_label":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194342,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+
+[internationalization]
+
+locale/translation_remaps={
+"res://Sounds/GrannySmith/GS_Bad_en.wav": PackedStringArray("res://Sounds/GrannySmith/GS_Bad_fr.wav:fr"),
+"res://Sounds/GrannySmith/GS_Good_en.wav": PackedStringArray("res://Sounds/GrannySmith/GS_Good_fr.wav:fr")
+}
+locale/translations=PackedStringArray("res://Translations/Translations.en.translation", "res://Translations/Translations.fr.translation")
+locale/locale_filter_mode=0
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

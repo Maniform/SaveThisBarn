@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmijdxt1hk5vr"]
+
+[ext_resource type="Script" path="res://Scripts/AnimatedActor.gd" id="1_umupt"]
+[ext_resource type="SpriteFrames" uid="uid://btfhxsa6yxn15" path="res://Sprites/GrannySmith/Idle/GS_Idle.tres" id="3_d6c0a"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Camera2D"]
+sprite_frames = ExtResource("3_d6c0a")
+script = ExtResource("1_umupt")
+animations = null
+
+[connection signal="animation_finished" from="Camera2D/AnimatedSprite2D" to="Camera2D/AnimatedSprite2D" method="_on_animation_finished"]

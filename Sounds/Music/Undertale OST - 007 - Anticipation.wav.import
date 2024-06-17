@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://db8mx5mxxyu6w"
+path="res://.godot/imported/Undertale OST - 007 - Anticipation.wav-33c8d7c762157675402d082a4e691fd8.sample"
+
+[deps]
+
+source_file="res://Sounds/Music/Undertale OST - 007 - Anticipation.wav"
+dest_files=["res://.godot/imported/Undertale OST - 007 - Anticipation.wav-33c8d7c762157675402d082a4e691fd8.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
