@@ -16,6 +16,7 @@ var barrels:= 0 as int
 func _ready():
 	apple_progress_bar.max_value = apple_per_barrel
 	barrel_progress_bar.max_value = barrels_objective
+	player_controller.input_game_mode = PlayerController.INPUT_GAME_MODE.GAME
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -43,6 +44,7 @@ func remove_apple(number:= 1 as int):
 	apple_progress_bar.value = apples
 
 func win():
+	player_controller.input_game_mode = PlayerController.INPUT_GAME_MODE.UI
 	celebration_spawner.activated = true
 	main_music.stop()
 	sound_effect.stream = victory_sound_effect

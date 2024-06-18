@@ -16,10 +16,11 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_action_just_pressed("ui_left"):
-		select_apple(false)
-	elif Input.is_action_just_pressed("ui_right"):
-		select_apple(true)
+	if player_controller.input_game_mode == PlayerController.INPUT_GAME_MODE.GAME:
+		if Input.is_action_just_pressed("ui_left"):
+			select_apple(false)
+		elif Input.is_action_just_pressed("ui_right"):
+			select_apple(true)
 
 func select_apple(is_good: bool):
 	if is_good:
