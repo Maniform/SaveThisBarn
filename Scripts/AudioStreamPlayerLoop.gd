@@ -1,5 +1,6 @@
 class_name AudioStreamPlayerLoop extends AudioStreamPlayer
 
+var loop:= true as bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,4 +13,5 @@ func _process(delta):
 
 
 func _on_finished():
-	play()
+	if loop:
+		play()

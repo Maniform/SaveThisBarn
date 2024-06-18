@@ -20,6 +20,7 @@ config/icon="res://Sprites/MainMenu/Icon.png"
 main_music="*res://Singletons/MainMusic.gd"
 player_controller="*res://Singletons/PlayerController.gd"
 game_config="*res://Singletons/GameConfig.gd"
+sound_effect="*res://Singletons/SoundEffect.gd"
 
 [input]
 

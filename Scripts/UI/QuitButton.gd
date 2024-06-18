@@ -12,4 +12,5 @@ func _process(delta):
 
 
 func _on_pressed():
+	game_config.save_congig()
 	get_tree().quit()

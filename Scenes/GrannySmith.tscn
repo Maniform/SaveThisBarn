@@ -1,25 +1,56 @@
-[gd_scene load_steps=12 format=3 uid="uid://bmijdxt1hk5vr"]
+[gd_scene load_steps=24 format=3 uid="uid://bmijdxt1hk5vr"]
 
-[ext_resource type="SpriteFrames" uid="uid://btfhxsa6yxn15" path="res://Sprites/GrannySmith/GS.tres" id="1_mbrwe"]
-[ext_resource type="Script" path="res://Sprites/GrannySmith/GrannySmith.gd" id="2_mg3uy"]
+[ext_resource type="Script" path="res://Scripts/CelebrationSpawner.gd" id="1_rf7lk"]
+[ext_resource type="Script" path="res://GameModes/AppleSortGameMode.gd" id="1_tiu3p"]
+[ext_resource type="SpriteFrames" uid="uid://btfhxsa6yxn15" path="res://Sprites/AppleSort/GS.tres" id="1_yftt8"]
+[ext_resource type="AudioStream" uid="uid://dlbfva775mrnn" path="res://Sounds/Yay.wav" id="2_ach2u"]
+[ext_resource type="Script" path="res://Sprites/AppleSort/GrannySmith.gd" id="2_p0nb0"]
+[ext_resource type="Texture2D" uid="uid://ek4csiccdfmb" path="res://Sprites/Celebration/Apple/AJ_Happy0.png" id="2_tc2ww"]
+[ext_resource type="Texture2D" uid="uid://c5dgxoxwf0yv0" path="res://Sprites/Celebration/Apple/AJ_Happy1.png" id="3_0bqqh"]
 [ext_resource type="AudioStream" uid="uid://dpt8pqeviu524" path="res://Sounds/GrannySmith/GS_Good_en.wav" id="3_305wk"]
+[ext_resource type="AudioStream" uid="uid://dncivd12tpj46" path="res://Sounds/Music/Cupcakes (8-bit).wav" id="3_uk75t"]
 [ext_resource type="AudioStream" uid="uid://sfbc8v7n8yoi" path="res://Sounds/GrannySmith/GS_Bad_en.wav" id="4_0h7t7"]
+[ext_resource type="Texture2D" uid="uid://c1g6fhonkqs42" path="res://Sprites/Celebration/Apple/AJ_Happy2.png" id="4_b0k6r"]
+[ext_resource type="Texture2D" uid="uid://cknxst83da8d6" path="res://Sprites/Celebration/Apple/AJ_Happy3.png" id="5_l8ico"]
 [ext_resource type="Script" path="res://Scripts/AnimatedSprite2DViewportScaler.gd" id="5_ufwh4"]
+[ext_resource type="Texture2D" uid="uid://dtlev7hf6y6ia" path="res://Sprites/Celebration/Apple/AJ_Happy4.png" id="6_asiex"]
 [ext_resource type="Script" path="res://Assets/AppleSpawner/AppleSpawners.gd" id="6_j6mm1"]
 [ext_resource type="SpriteFrames" uid="uid://bw50vlerqq2gl" path="res://Assets/AppleSpawner/Apples.tres" id="7_iwr0m"]
 [ext_resource type="Script" path="res://Assets/AppleSpawner/AppleSpawner.gd" id="8_0sj65"]
 [ext_resource type="Shape2D" uid="uid://bihrgctlsn5ex" path="res://TouchControl/MidScreenTouchRect.tres" id="8_7h2g3"]
 [ext_resource type="Script" path="res://TouchControl/TouchScreenButton.gd" id="9_6yjfh"]
-[ext_resource type="Script" path="res://Scripts/AppleSort/AppleProgressBar.gd" id="9_ixt08"]
+[ext_resource type="Texture2D" uid="uid://s0xbgg1apdcw" path="res://Assets/AppleSpawner/GoodApple.png" id="10_ba7y2"]
+[ext_resource type="StyleBox" uid="uid://dru30wuyh2xfv" path="res://Assets/AppleSpawner/AppleProgressBarStyle.tres" id="10_js23d"]
+[ext_resource type="Texture2D" uid="uid://dbqeo5ufonkvc" path="res://Sprites/AppleSort/barrel.png" id="11_w7l6y"]
+[ext_resource type="StyleBox" uid="uid://25tmcp8c52af" path="res://Assets/AppleSpawner/BarrelProgressBarStyle.tres" id="12_wdvva"]
 
 [node name="Node2D" type="Node2D"]
+
+[node name="AppleSortGameMode" type="Node" parent="." node_paths=PackedStringArray("current_apple_spawner", "apple_progress_bar", "barrel_progress_bar", "celebration_spawner")]
+script = ExtResource("1_tiu3p")
+current_apple_spawner = NodePath("../Camera2D/GrannySmith/AppleSpawners/AppleSpawner0")
+apple_progress_bar = NodePath("../Camera2D/GrannySmith/AppleProgressBar/ProgressBar")
+barrel_progress_bar = NodePath("../Camera2D/GrannySmith/BarrelProgressBar/ProgressBar")
+celebration_spawner = NodePath("../CelebrationSpawner")
+victory_sound_effect = ExtResource("2_ach2u")
+victory_music = ExtResource("3_uk75t")
+
+[node name="CelebrationSpawner" type="Node" parent="."]
+script = ExtResource("1_rf7lk")
+objects = {
+ExtResource("2_tc2ww"): 1.0,
+ExtResource("3_0bqqh"): 1.0,
+ExtResource("4_b0k6r"): 1.0,
+ExtResource("5_l8ico"): 1.0,
+ExtResource("6_asiex"): 0.1
+}
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="GrannySmith" type="AnimatedSprite2D" parent="Camera2D"]
-sprite_frames = ExtResource("1_mbrwe")
+sprite_frames = ExtResource("1_yftt8")
 animation = &"Idle"
-script = ExtResource("2_mg3uy")
+script = ExtResource("2_p0nb0")
 good_sound = ExtResource("3_305wk")
 bad_sound = ExtResource("4_0h7t7")
 
@@ -65,29 +96,46 @@ script = ExtResource("8_0sj65")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Camera2D/GrannySmith"]
 bus = &"Effects"
 
-[node name="AppleProgressBar" type="ProgressBar" parent="."]
+[node name="AppleProgressBar" type="Node2D" parent="Camera2D/GrannySmith"]
+
+[node name="ProgressBar" type="ProgressBar" parent="Camera2D/GrannySmith/AppleProgressBar"]
 offset_left = -910.0
 offset_top = -490.0
 offset_right = -810.0
 offset_bottom = -240.0
+theme_override_styles/fill = ExtResource("10_js23d")
 fill_mode = 3
 show_percentage = false
-script = ExtResource("9_ixt08")
 
-[node name="BarrelProgressBar" type="ProgressBar" parent="."]
+[node name="GoodApple" type="Sprite2D" parent="Camera2D/GrannySmith/AppleProgressBar"]
+position = Vector2(-859, -194)
+scale = Vector2(0.286667, 0.286667)
+texture = ExtResource("10_ba7y2")
+
+[node name="BarrelProgressBar" type="Node2D" parent="Camera2D/GrannySmith"]
+
+[node name="ProgressBar" type="ProgressBar" parent="Camera2D/GrannySmith/BarrelProgressBar"]
 offset_left = -760.0
 offset_top = -490.0
 offset_right = -660.0
 offset_bottom = -240.0
+theme_override_styles/fill = ExtResource("12_wdvva")
 fill_mode = 3
 show_percentage = false
 
-[node name="HalfScreenButtonLeft" type="TouchScreenButton" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D/GrannySmith/BarrelProgressBar"]
+position = Vector2(-711, -189)
+scale = Vector2(0.024697, 0.024697)
+texture = ExtResource("11_w7l6y")
+
+[node name="HalfScreenButtonLeft" type="TouchScreenButton" parent="Camera2D/GrannySmith"]
+visible = false
 position = Vector2(-480, 0)
 shape = ExtResource("8_7h2g3")
 script = ExtResource("9_6yjfh")
 
-[node name="HalfScreenButtonRight" type="TouchScreenButton" parent="."]
+[node name="HalfScreenButtonRight" type="TouchScreenButton" parent="Camera2D/GrannySmith"]
+visible = false
 position = Vector2(480, 0)
 shape = ExtResource("8_7h2g3")
 script = ExtResource("9_6yjfh")
@@ -95,5 +143,6 @@ emit_value = 1
 
 [connection signal="animation_finished" from="Camera2D/GrannySmith" to="Camera2D/GrannySmith" method="_on_animation_finished"]
 [connection signal="apple_thrown" from="Camera2D/GrannySmith" to="Camera2D/GrannySmith/AppleSpawners" method="change"]
-[connection signal="pressed_direction" from="HalfScreenButtonLeft" to="Camera2D/GrannySmith" method="select_apple"]
-[connection signal="pressed_direction" from="HalfScreenButtonRight" to="Camera2D/GrannySmith" method="select_apple"]
+[connection signal="apple_thrown_choice" from="Camera2D/GrannySmith" to="AppleSortGameMode" method="on_apple_thrown"]
+[connection signal="pressed_direction" from="Camera2D/GrannySmith/HalfScreenButtonLeft" to="Camera2D/GrannySmith" method="select_apple"]
+[connection signal="pressed_direction" from="Camera2D/GrannySmith/HalfScreenButtonRight" to="Camera2D/GrannySmith" method="select_apple"]
