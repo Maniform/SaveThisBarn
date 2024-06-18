@@ -17,6 +17,7 @@ func _notification(what):
 		save_congig()
 
 func load_config():
+	player_controller.set_fullscreen(config.get_value("Display", "Fullscreen", false))
 	for audio_bus_index in range(0,AudioServer.bus_count - 1):
 		var audio_bus_name = AudioServer.get_bus_name(audio_bus_index)
 		var volume_db = config.get_value(audio_bus_name, "Volume")
@@ -27,6 +28,7 @@ func load_config():
 			AudioServer.set_bus_mute(audio_bus_index, is_bus_mute)
 		
 func save_congig():
+	config.set_value("Display", "Fullscreen", player_controller.fullscreen)
 	for audio_bus_index in range(0,AudioServer.bus_count - 1):
 		var audio_bus_name = AudioServer.get_bus_name(audio_bus_index)
 		var volume_db = AudioServer.get_bus_volume_db(audio_bus_index)

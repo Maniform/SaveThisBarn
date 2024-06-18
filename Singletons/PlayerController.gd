@@ -1,18 +1,23 @@
 extends Node
 
-var current_window_mode = 0
+var fullscreen: bool
 var window_modes = [
 	DisplayServer.WINDOW_MODE_WINDOWED,
 	DisplayServer.WINDOW_MODE_FULLSCREEN
 ]
 
+signal fullscreen_state_changed(enabled: bool)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	fullscreen = (DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN || DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("ui_toggle_fullscreen"):
-		current_window_mode += 1;
-		current_window_mode %= 2;
-		DisplayServer.window_set_mode(window_modes[current_window_mode])
+		set_fullscreen(!fullscreen)
+
+func set_fullscreen(enabled: bool):
+	fullscreen = enabled
+	DisplayServer.window_set_mode(window_modes[int(fullscreen)])
+	fullscreen_state_changed.emit(fullscreen)

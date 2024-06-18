@@ -1,17 +1,20 @@
-[gd_scene load_steps=13 format=3 uid="uid://ymik4ne2syov"]
+[gd_scene load_steps=16 format=3 uid="uid://ymik4ne2syov"]
 
 [ext_resource type="Texture2D" uid="uid://dsia6qysqojq0" path="res://Sprites/MainMenu/Intro.png" id="1_jqn87"]
-[ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="2_twkw3"]
+[ext_resource type="Script" path="res://Scripts/UI/MainMenu.gd" id="2_twkw3"]
 [ext_resource type="PackedScene" uid="uid://bmijdxt1hk5vr" path="res://Scenes/GrannySmith.tscn" id="4_8o8k2"]
-[ext_resource type="Script" path="res://Scripts/OpenSubMenuButton.gd" id="4_rcjdj"]
-[ext_resource type="Script" path="res://Scripts/SubMenu.gd" id="5_fl7an"]
-[ext_resource type="Script" path="res://Scripts/GoToSceneTextureButton.gd" id="5_kex6g"]
+[ext_resource type="Script" path="res://Scripts/UI/OpenSubMenuButton.gd" id="4_rcjdj"]
+[ext_resource type="Script" path="res://Scripts/UI/QuitButton.gd" id="5_abq7c"]
+[ext_resource type="Script" path="res://Scripts/UI/SubMenu.gd" id="5_fl7an"]
+[ext_resource type="Script" path="res://Scripts/UI/GoToSceneTextureButton.gd" id="5_kex6g"]
 [ext_resource type="Texture2D" uid="uid://bklhxws3duhf5" path="res://Sprites/MainMenu/black_filter.png" id="6_h4npt"]
 [ext_resource type="Texture2D" uid="uid://c3xlr77jpierw" path="res://Sprites/MainMenu/GS_Idle_button.png" id="7_a266i"]
 [ext_resource type="Texture2D" uid="uid://vslw6j5ru436" path="res://Sprites/MainMenu/GS_Idle_button_pressed.png" id="8_xgodt"]
 [ext_resource type="Texture2D" uid="uid://daxpagpn1hlv3" path="res://Sprites/MainMenu/GS_Idle_button_hovered.png" id="9_f8ru2"]
 [ext_resource type="Texture2D" uid="uid://vuyf83ga2d5x" path="res://Sprites/MainMenu/Title.png" id="10_4pxji"]
-[ext_resource type="Script" path="res://Scripts/VolumeSlider.gd" id="12_hb4xj"]
+[ext_resource type="Script" path="res://Scripts/PlatformAssetSelector.gd" id="13_4dxo4"]
+[ext_resource type="PackedScene" uid="uid://ornekx1e255q" path="res://Assets/UI/windows_settings.tscn" id="13_gst54"]
+[ext_resource type="PackedScene" uid="uid://cnucwa0vglkc2" path="res://Assets/UI/android_settings.tscn" id="14_qs56e"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -27,49 +30,63 @@ scale = Vector2(0.371296, 0.371296)
 texture = ExtResource("10_4pxji")
 
 [node name="StartButton" type="Button" parent="Camera2D/MainMenuSprite" node_paths=PackedStringArray("nodes_to_hide", "submenu_to_open")]
-anchors_preset = 2
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -918.0
-offset_top = -962.0
-offset_right = -438.0
-offset_bottom = -818.0
+offset_left = -540.0
+offset_top = -1008.0
+offset_right = -60.0
+offset_bottom = -864.0
+grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(240, 72)
 theme_override_font_sizes/font_size = 50
 text = "StartGame"
 script = ExtResource("4_rcjdj")
-nodes_to_hide = [NodePath("."), NodePath("../SettingsButton")]
+nodes_to_hide = [NodePath("."), NodePath("../SettingsButton"), NodePath("../QuitButton")]
 submenu_to_open = NodePath("../Workers")
 
 [node name="SettingsButton" type="Button" parent="Camera2D/MainMenuSprite" node_paths=PackedStringArray("nodes_to_hide", "submenu_to_open")]
-anchors_preset = 2
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -918.0
-offset_top = -800.0
-offset_right = -438.0
-offset_bottom = -656.0
+offset_left = -540.0
+offset_top = -854.0
+offset_right = -60.0
+offset_bottom = -710.0
+grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(240, 72)
 theme_override_font_sizes/font_size = 50
 text = "Settings"
 script = ExtResource("4_rcjdj")
-nodes_to_hide = [NodePath("../StartButton"), NodePath(".")]
-submenu_to_open = NodePath("../Settings")
+nodes_to_hide = [NodePath("../StartButton"), NodePath("."), NodePath("../QuitButton")]
+submenu_to_open = NodePath("../PlatformAssetSelector")
 
-[node name="Workers" type="Control" parent="Camera2D/MainMenuSprite"]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
+[node name="QuitButton" type="Button" parent="Camera2D/MainMenuSprite"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -960.0
-offset_top = -540.0
-offset_right = -960.0
-offset_bottom = -540.0
+offset_left = -540.0
+offset_top = -694.0
+offset_right = -60.0
+offset_bottom = -550.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
+pivot_offset = Vector2(240, 72)
+theme_override_font_sizes/font_size = 50
+text = "QuitGame"
+script = ExtResource("5_abq7c")
+
+[node name="Workers" type="Node2D" parent="Camera2D/MainMenuSprite"]
+visible = false
+position = Vector2(-960, -540)
 script = ExtResource("5_fl7an")
 
 [node name="Filter" type="Sprite2D" parent="Camera2D/MainMenuSprite/Workers"]
@@ -78,7 +95,6 @@ position = Vector2(960, 540)
 texture = ExtResource("6_h4npt")
 
 [node name="GridContainer" type="GridContainer" parent="Camera2D/MainMenuSprite/Workers"]
-layout_mode = 0
 offset_left = 50.0
 offset_top = 50.0
 offset_right = 1870.0
@@ -95,95 +111,54 @@ script = ExtResource("5_kex6g")
 scene = ExtResource("4_8o8k2")
 
 [node name="BackWorkersButton" type="Button" parent="Camera2D/MainMenuSprite/Workers"]
-layout_mode = 0
-offset_left = 30.0
-offset_top = 950.0
-offset_right = 274.0
-offset_bottom = 1055.0
-theme_override_font_sizes/font_size = 50
-text = "Back"
-
-[node name="Settings" type="Control" parent="Camera2D/MainMenuSprite"]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -960.0
-offset_top = -540.0
-offset_right = -960.0
-offset_bottom = -540.0
+offset_left = 1380.0
+offset_top = 926.0
+offset_right = 1860.0
+offset_bottom = 1070.0
 grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("5_fl7an")
-
-[node name="Filter" type="Sprite2D" parent="Camera2D/MainMenuSprite/Settings"]
-modulate = Color(1, 1, 1, 0.764706)
-texture = ExtResource("6_h4npt")
-centered = false
-
-[node name="GridContainer" type="GridContainer" parent="Camera2D/MainMenuSprite/Settings"]
-layout_mode = 0
-offset_left = 50.0
-offset_top = 50.0
-offset_right = 1870.0
-offset_bottom = 1030.0
-columns = 2
-
-[node name="Label" type="Label" parent="Camera2D/MainMenuSprite/Settings/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 50
-text = "Volume"
-
-[node name="Control" type="Control" parent="Camera2D/MainMenuSprite/Settings/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label2" type="Label" parent="Camera2D/MainMenuSprite/Settings/GridContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "Master"
-
-[node name="MasterVolumeSlider" type="HSlider" parent="Camera2D/MainMenuSprite/Settings/GridContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-script = ExtResource("12_hb4xj")
-audio_bus_name = &"Master"
-
-[node name="Label3" type="Label" parent="Camera2D/MainMenuSprite/Settings/GridContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "Music"
-
-[node name="MusicVolumeSlider" type="HSlider" parent="Camera2D/MainMenuSprite/Settings/GridContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-script = ExtResource("12_hb4xj")
-audio_bus_name = &"Music"
-
-[node name="Label4" type="Label" parent="Camera2D/MainMenuSprite/Settings/GridContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "Effects"
-
-[node name="EffectsVolumeSlider" type="HSlider" parent="Camera2D/MainMenuSprite/Settings/GridContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-script = ExtResource("12_hb4xj")
-audio_bus_name = &"Effects"
-
-[node name="BackSettingsButton" type="Button" parent="Camera2D/MainMenuSprite/Settings"]
-layout_mode = 0
-offset_left = 30.0
-offset_top = 950.0
-offset_right = 274.0
-offset_bottom = 1055.0
+grow_vertical = 0
+pivot_offset = Vector2(240, 72)
 theme_override_font_sizes/font_size = 50
 text = "Back"
+script = ExtResource("5_abq7c")
+
+[node name="PlatformAssetSelector" type="Node2D" parent="Camera2D/MainMenuSprite" node_paths=PackedStringArray("WindowsAsset", "AndroidAsset")]
+visible = false
+script = ExtResource("13_4dxo4")
+WindowsAsset = NodePath("WindowsSettings")
+AndroidAsset = NodePath("AndroidSettings")
+
+[node name="WindowsSettings" parent="Camera2D/MainMenuSprite/PlatformAssetSelector" instance=ExtResource("13_gst54")]
+position = Vector2(-960, -540)
+
+[node name="AndroidSettings" parent="Camera2D/MainMenuSprite/PlatformAssetSelector" instance=ExtResource("14_qs56e")]
+position = Vector2(-960, -540)
+
+[node name="BackSettingsButton" type="Button" parent="Camera2D/MainMenuSprite/PlatformAssetSelector"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 420.0
+offset_top = 386.0
+offset_right = 900.0
+offset_bottom = 530.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(240, 72)
+theme_override_font_sizes/font_size = 50
+text = "Back"
+script = ExtResource("5_abq7c")
 
 [connection signal="pressed" from="Camera2D/MainMenuSprite/StartButton" to="Camera2D/MainMenuSprite/StartButton" method="on_pressed"]
 [connection signal="pressed" from="Camera2D/MainMenuSprite/SettingsButton" to="Camera2D/MainMenuSprite/SettingsButton" method="on_pressed"]
+[connection signal="pressed" from="Camera2D/MainMenuSprite/QuitButton" to="Camera2D/MainMenuSprite/QuitButton" method="_on_pressed"]
 [connection signal="pressed" from="Camera2D/MainMenuSprite/Workers/GridContainer/TextureButton" to="Camera2D/MainMenuSprite/Workers/GridContainer/TextureButton" method="_on_pressed"]
 [connection signal="pressed" from="Camera2D/MainMenuSprite/Workers/BackWorkersButton" to="Camera2D/MainMenuSprite/Workers" method="close"]
-[connection signal="pressed" from="Camera2D/MainMenuSprite/Settings/BackSettingsButton" to="Camera2D/MainMenuSprite/Settings" method="close"]
+[connection signal="pressed" from="Camera2D/MainMenuSprite/PlatformAssetSelector/BackSettingsButton" to="Camera2D/MainMenuSprite/PlatformAssetSelector" method="close"]

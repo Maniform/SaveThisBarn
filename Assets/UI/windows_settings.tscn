@@ -1,0 +1,75 @@
+[gd_scene load_steps=4 format=3 uid="uid://ornekx1e255q"]
+
+[ext_resource type="PackedScene" uid="uid://m3ohfybg8y6a" path="res://Assets/UI/filter_grid_button.tscn" id="1_qmhoo"]
+[ext_resource type="Script" path="res://Scripts/UI/FullscreenCheckBox.gd" id="3_d26ti"]
+[ext_resource type="Script" path="res://Scripts/UI/VolumeSlider.gd" id="4_bjo6t"]
+
+[node name="WindowsSettings" instance=ExtResource("1_qmhoo")]
+
+[node name="DisplayLabel" type="Label" parent="GridContainer" index="0"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Display"
+
+[node name="Empty2" type="Control" parent="GridContainer" index="1"]
+layout_mode = 2
+
+[node name="Empty3" type="Control" parent="GridContainer" index="2"]
+layout_mode = 2
+
+[node name="FullscreenCheckBox" type="CheckBox" parent="GridContainer" index="3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Fullscreen"
+script = ExtResource("3_d26ti")
+
+[node name="HSeparator" type="HSeparator" parent="GridContainer" index="4"]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="GridContainer" index="5"]
+layout_mode = 2
+
+[node name="VolumeLabel" type="Label" parent="GridContainer" index="6"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+text = "Volume"
+
+[node name="Control" type="Control" parent="GridContainer" index="7"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MasterLabel" type="Label" parent="GridContainer" index="8"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Master"
+
+[node name="MasterVolumeSlider" type="HSlider" parent="GridContainer" index="9"]
+layout_mode = 2
+size_flags_vertical = 4
+script = ExtResource("4_bjo6t")
+audio_bus_name = &"Master"
+
+[node name="MusicLabel" type="Label" parent="GridContainer" index="10"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Music"
+
+[node name="MusicVolumeSlider" type="HSlider" parent="GridContainer" index="11"]
+layout_mode = 2
+size_flags_vertical = 4
+script = ExtResource("4_bjo6t")
+audio_bus_name = &"Music"
+
+[node name="EffectsLabel" type="Label" parent="GridContainer" index="12"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Effects"
+
+[node name="EffectsVolumeSlider" type="HSlider" parent="GridContainer" index="13"]
+layout_mode = 2
+size_flags_vertical = 4
+script = ExtResource("4_bjo6t")
+audio_bus_name = &"Effects"
+
+[connection signal="toggled" from="GridContainer/FullscreenCheckBox" to="GridContainer/FullscreenCheckBox" method="_on_toggled"]

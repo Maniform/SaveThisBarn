@@ -1,15 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://bmijdxt1hk5vr"]
+[gd_scene load_steps=12 format=3 uid="uid://bmijdxt1hk5vr"]
 
 [ext_resource type="SpriteFrames" uid="uid://btfhxsa6yxn15" path="res://Sprites/GrannySmith/GS.tres" id="1_mbrwe"]
 [ext_resource type="Script" path="res://Sprites/GrannySmith/GrannySmith.gd" id="2_mg3uy"]
 [ext_resource type="AudioStream" uid="uid://dpt8pqeviu524" path="res://Sounds/GrannySmith/GS_Good_en.wav" id="3_305wk"]
 [ext_resource type="AudioStream" uid="uid://sfbc8v7n8yoi" path="res://Sounds/GrannySmith/GS_Bad_en.wav" id="4_0h7t7"]
-[ext_resource type="SpriteFrames" uid="uid://bw50vlerqq2gl" path="res://Sprites/AppleSpawner/Apples.tres" id="5_ahv7m"]
 [ext_resource type="Script" path="res://Scripts/AnimatedSprite2DViewportScaler.gd" id="5_ufwh4"]
-[ext_resource type="Script" path="res://Sprites/AppleSpawner/AppleSpawner.gd" id="6_hf5ga"]
-[ext_resource type="Script" path="res://Scenes/AppleSpawners.gd" id="6_j6mm1"]
+[ext_resource type="Script" path="res://Assets/AppleSpawner/AppleSpawners.gd" id="6_j6mm1"]
+[ext_resource type="SpriteFrames" uid="uid://bw50vlerqq2gl" path="res://Assets/AppleSpawner/Apples.tres" id="7_iwr0m"]
+[ext_resource type="Script" path="res://Assets/AppleSpawner/AppleSpawner.gd" id="8_0sj65"]
 [ext_resource type="Shape2D" uid="uid://bihrgctlsn5ex" path="res://TouchControl/MidScreenTouchRect.tres" id="8_7h2g3"]
 [ext_resource type="Script" path="res://TouchControl/TouchScreenButton.gd" id="9_6yjfh"]
+[ext_resource type="Script" path="res://Scripts/AppleSort/AppleProgressBar.gd" id="9_ixt08"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -31,47 +32,62 @@ script = ExtResource("6_j6mm1")
 
 [node name="AppleSpawner0" type="AnimatedSprite2D" parent="Camera2D/GrannySmith/AppleSpawners"]
 scale = Vector2(0.49, 0.49)
-sprite_frames = ExtResource("5_ahv7m")
-script = ExtResource("6_hf5ga")
+sprite_frames = ExtResource("7_iwr0m")
+script = ExtResource("8_0sj65")
 
 [node name="AppleSpawner1" type="AnimatedSprite2D" parent="Camera2D/GrannySmith/AppleSpawners"]
 position = Vector2(-150, 0)
 scale = Vector2(0.49, 0.49)
-sprite_frames = ExtResource("5_ahv7m")
-script = ExtResource("6_hf5ga")
+sprite_frames = ExtResource("7_iwr0m")
+script = ExtResource("8_0sj65")
 
 [node name="AppleSpawner2" type="AnimatedSprite2D" parent="Camera2D/GrannySmith/AppleSpawners"]
 modulate = Color(1, 1, 1, 0.784314)
 position = Vector2(-300, 0)
 scale = Vector2(0.49, 0.49)
-sprite_frames = ExtResource("5_ahv7m")
-script = ExtResource("6_hf5ga")
+sprite_frames = ExtResource("7_iwr0m")
+script = ExtResource("8_0sj65")
 
 [node name="AppleSpawner3" type="AnimatedSprite2D" parent="Camera2D/GrannySmith/AppleSpawners"]
 modulate = Color(1, 1, 1, 0.588235)
 position = Vector2(-450, 0)
 scale = Vector2(0.49, 0.49)
-sprite_frames = ExtResource("5_ahv7m")
-script = ExtResource("6_hf5ga")
+sprite_frames = ExtResource("7_iwr0m")
+script = ExtResource("8_0sj65")
 
 [node name="AppleSpawner4" type="AnimatedSprite2D" parent="Camera2D/GrannySmith/AppleSpawners"]
 modulate = Color(1, 1, 1, 0.392157)
 position = Vector2(-600, 0)
 scale = Vector2(0.49, 0.49)
-sprite_frames = ExtResource("5_ahv7m")
-script = ExtResource("6_hf5ga")
+sprite_frames = ExtResource("7_iwr0m")
+script = ExtResource("8_0sj65")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Camera2D/GrannySmith"]
 bus = &"Effects"
 
+[node name="AppleProgressBar" type="ProgressBar" parent="."]
+offset_left = -910.0
+offset_top = -490.0
+offset_right = -810.0
+offset_bottom = -240.0
+fill_mode = 3
+show_percentage = false
+script = ExtResource("9_ixt08")
+
+[node name="BarrelProgressBar" type="ProgressBar" parent="."]
+offset_left = -760.0
+offset_top = -490.0
+offset_right = -660.0
+offset_bottom = -240.0
+fill_mode = 3
+show_percentage = false
+
 [node name="HalfScreenButtonLeft" type="TouchScreenButton" parent="."]
-visible = false
 position = Vector2(-480, 0)
 shape = ExtResource("8_7h2g3")
 script = ExtResource("9_6yjfh")
 
 [node name="HalfScreenButtonRight" type="TouchScreenButton" parent="."]
-visible = false
 position = Vector2(480, 0)
 shape = ExtResource("8_7h2g3")
 script = ExtResource("9_6yjfh")

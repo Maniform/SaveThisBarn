@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://m3ohfybg8y6a"]
+
+[ext_resource type="Texture2D" uid="uid://bklhxws3duhf5" path="res://Sprites/MainMenu/black_filter.png" id="1_ska81"]
+
+[node name="FilterGridUI" type="Node2D"]
+
+[node name="Filter" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.764706)
+texture = ExtResource("1_ska81")
+centered = false
+
+[node name="GridContainer" type="GridContainer" parent="."]
+offset_left = 572.0
+offset_top = 50.0
+offset_right = 1230.0
+offset_bottom = 1030.0
+columns = 2
