@@ -1,6 +1,6 @@
 class_name PlayerController extends Node
 
-enum INPUT_GAME_MODE {UI, GAME}
+enum INPUT_GAME_MODE {NONE, UI, GAME}
 
 var input_game_mode:= INPUT_GAME_MODE.UI as INPUT_GAME_MODE
 var fullscreen: bool

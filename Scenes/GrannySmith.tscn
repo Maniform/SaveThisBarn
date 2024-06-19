@@ -12,7 +12,6 @@
 [ext_resource type="AudioStream" uid="uid://sfbc8v7n8yoi" path="res://Sounds/GrannySmith/GS_Bad_en.wav" id="4_0h7t7"]
 [ext_resource type="Texture2D" uid="uid://c1g6fhonkqs42" path="res://Sprites/Celebration/Apple/AJ_Happy2.png" id="4_b0k6r"]
 [ext_resource type="Texture2D" uid="uid://cknxst83da8d6" path="res://Sprites/Celebration/Apple/AJ_Happy3.png" id="5_l8ico"]
-[ext_resource type="Script" path="res://Scripts/AnimatedSprite2DViewportScaler.gd" id="5_ufwh4"]
 [ext_resource type="Texture2D" uid="uid://dtlev7hf6y6ia" path="res://Sprites/Celebration/Apple/AJ_Happy4.png" id="6_asiex"]
 [ext_resource type="Script" path="res://Assets/AppleSpawner/AppleSpawners.gd" id="6_j6mm1"]
 [ext_resource type="SpriteFrames" uid="uid://bw50vlerqq2gl" path="res://Assets/AppleSpawner/Apples.tres" id="7_iwr0m"]
@@ -23,17 +22,24 @@
 [ext_resource type="StyleBox" uid="uid://dru30wuyh2xfv" path="res://Assets/AppleSpawner/AppleProgressBarStyle.tres" id="10_js23d"]
 [ext_resource type="Texture2D" uid="uid://dbqeo5ufonkvc" path="res://Sprites/AppleSort/barrel.png" id="11_w7l6y"]
 [ext_resource type="StyleBox" uid="uid://25tmcp8c52af" path="res://Assets/AppleSpawner/BarrelProgressBarStyle.tres" id="12_wdvva"]
+[ext_resource type="Texture2D" uid="uid://c22mf5xbdssfn" path="res://Sprites/FlimAndFlam.png" id="22_1qdr4"]
 
 [node name="Node2D" type="Node2D"]
 
-[node name="AppleSortGameMode" type="Node" parent="." node_paths=PackedStringArray("current_apple_spawner", "apple_progress_bar", "barrel_progress_bar", "celebration_spawner")]
+[node name="AppleSortGameMode" type="Node" parent="." node_paths=PackedStringArray("current_apple_spawner", "apple_progress_bar", "barrel_progress_bar", "ff_apple_progress_bar", "ff_barrel_progress_bar", "celebration_spawner")]
 script = ExtResource("1_tiu3p")
 current_apple_spawner = NodePath("../Camera2D/GrannySmith/AppleSpawners/AppleSpawner0")
 apple_progress_bar = NodePath("../Camera2D/GrannySmith/AppleProgressBar/ProgressBar")
 barrel_progress_bar = NodePath("../Camera2D/GrannySmith/BarrelProgressBar/ProgressBar")
+ff_apple_progress_bar = NodePath("../Camera2D/GrannySmith/FFAppleProgressBar/ProgressBar")
+ff_barrel_progress_bar = NodePath("../Camera2D/GrannySmith/FFBarrelProgressBar/ProgressBar")
+ff_apple_delay = 0.5
 celebration_spawner = NodePath("../CelebrationSpawner")
 victory_sound_effect = ExtResource("2_ach2u")
 victory_music = ExtResource("3_uk75t")
+lose_scene = 2
+
+[node name="FFTimer" type="Timer" parent="AppleSortGameMode"]
 
 [node name="CelebrationSpawner" type="Node" parent="."]
 script = ExtResource("1_rf7lk")
@@ -53,9 +59,6 @@ animation = &"Idle"
 script = ExtResource("2_p0nb0")
 good_sound = ExtResource("3_305wk")
 bad_sound = ExtResource("4_0h7t7")
-
-[node name="AnimatedSprite2DViewportScaler" type="Node2D" parent="Camera2D/GrannySmith"]
-script = ExtResource("5_ufwh4")
 
 [node name="AppleSpawners" type="Node2D" parent="Camera2D/GrannySmith"]
 position = Vector2(0, 394)
@@ -97,36 +100,69 @@ script = ExtResource("8_0sj65")
 bus = &"Effects"
 
 [node name="AppleProgressBar" type="Node2D" parent="Camera2D/GrannySmith"]
+position = Vector2(-910, -490)
 
 [node name="ProgressBar" type="ProgressBar" parent="Camera2D/GrannySmith/AppleProgressBar"]
-offset_left = -910.0
-offset_top = -490.0
-offset_right = -810.0
-offset_bottom = -240.0
+offset_right = 100.0
+offset_bottom = 250.0
 theme_override_styles/fill = ExtResource("10_js23d")
 fill_mode = 3
 show_percentage = false
 
 [node name="GoodApple" type="Sprite2D" parent="Camera2D/GrannySmith/AppleProgressBar"]
-position = Vector2(-859, -194)
+position = Vector2(50, 296)
 scale = Vector2(0.286667, 0.286667)
 texture = ExtResource("10_ba7y2")
 
 [node name="BarrelProgressBar" type="Node2D" parent="Camera2D/GrannySmith"]
+position = Vector2(-760, -490)
 
 [node name="ProgressBar" type="ProgressBar" parent="Camera2D/GrannySmith/BarrelProgressBar"]
-offset_left = -760.0
-offset_top = -490.0
-offset_right = -660.0
-offset_bottom = -240.0
+offset_right = 100.0
+offset_bottom = 250.0
 theme_override_styles/fill = ExtResource("12_wdvva")
 fill_mode = 3
 show_percentage = false
 
 [node name="Sprite2D" type="Sprite2D" parent="Camera2D/GrannySmith/BarrelProgressBar"]
-position = Vector2(-711, -189)
+position = Vector2(50, 300)
 scale = Vector2(0.024697, 0.024697)
 texture = ExtResource("11_w7l6y")
+
+[node name="FFAppleProgressBar" type="Node2D" parent="Camera2D/GrannySmith"]
+position = Vector2(660, -490)
+
+[node name="ProgressBar" type="ProgressBar" parent="Camera2D/GrannySmith/FFAppleProgressBar"]
+offset_right = 100.0
+offset_bottom = 250.0
+theme_override_styles/fill = ExtResource("10_js23d")
+fill_mode = 3
+show_percentage = false
+
+[node name="GoodApple" type="Sprite2D" parent="Camera2D/GrannySmith/FFAppleProgressBar"]
+position = Vector2(50, 296)
+scale = Vector2(0.286667, 0.286667)
+texture = ExtResource("10_ba7y2")
+
+[node name="FFBarrelProgressBar" type="Node2D" parent="Camera2D/GrannySmith"]
+position = Vector2(810, -490)
+
+[node name="ProgressBar" type="ProgressBar" parent="Camera2D/GrannySmith/FFBarrelProgressBar"]
+offset_right = 100.0
+offset_bottom = 250.0
+theme_override_styles/fill = ExtResource("12_wdvva")
+fill_mode = 3
+show_percentage = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D/GrannySmith/FFBarrelProgressBar"]
+position = Vector2(50, 300)
+scale = Vector2(0.024697, 0.024697)
+texture = ExtResource("11_w7l6y")
+
+[node name="FlimAndFlam" type="Sprite2D" parent="Camera2D/GrannySmith"]
+position = Vector2(475, -363)
+scale = Vector2(0.38381, 0.38381)
+texture = ExtResource("22_1qdr4")
 
 [node name="HalfScreenButtonLeft" type="TouchScreenButton" parent="Camera2D/GrannySmith"]
 visible = false

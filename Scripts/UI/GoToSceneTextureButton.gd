@@ -1,16 +1,14 @@
-class_name GoToSceneButton extends TextureButton
+class_name GoToSceneTextureButton extends TextureButton
 
-@export var scene: PackedScene
+@export var scene: SceneManager.SCENE
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	pressed.connect(_on_pressed)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
-
 func _on_pressed():
-	get_tree().change_scene_to_packed(scene)
+	scene_manager.goto(scene)

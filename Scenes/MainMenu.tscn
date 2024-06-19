@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://ymik4ne2syov"]
+[gd_scene load_steps=17 format=3 uid="uid://ymik4ne2syov"]
 
 [ext_resource type="Texture2D" uid="uid://dsia6qysqojq0" path="res://Sprites/MainMenu/Intro.png" id="1_jqn87"]
-[ext_resource type="Script" path="res://Scripts/UI/MainMenu.gd" id="2_twkw3"]
-[ext_resource type="PackedScene" uid="uid://bmijdxt1hk5vr" path="res://Scenes/GrannySmith.tscn" id="4_8o8k2"]
+[ext_resource type="Script" path="res://Scripts/Music/MainMusicPlayer.gd" id="1_l3w6x"]
+[ext_resource type="AudioStream" uid="uid://3ulhds1542ha" path="res://Sounds/Music/Ponytune – Raise This Barn 8-bit.wav" id="2_k3q1u"]
+[ext_resource type="Script" path="res://Scripts/Sprite2DViewportScaler.gd" id="4_mfkef"]
 [ext_resource type="Script" path="res://Scripts/UI/OpenSubMenuButton.gd" id="4_rcjdj"]
 [ext_resource type="Script" path="res://Scripts/UI/QuitButton.gd" id="5_abq7c"]
 [ext_resource type="Script" path="res://Scripts/UI/SubMenu.gd" id="5_fl7an"]
@@ -18,11 +19,15 @@
 
 [node name="Node2D" type="Node2D"]
 
+[node name="MainMusicPlayer" type="Node" parent="."]
+script = ExtResource("1_l3w6x")
+stream = ExtResource("2_k3q1u")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="MainMenuSprite" type="Sprite2D" parent="Camera2D"]
 texture = ExtResource("1_jqn87")
-script = ExtResource("2_twkw3")
+script = ExtResource("4_mfkef")
 
 [node name="Title" type="Sprite2D" parent="Camera2D/MainMenuSprite"]
 position = Vector2(-692, -180)
@@ -108,7 +113,7 @@ texture_normal = ExtResource("7_a266i")
 texture_pressed = ExtResource("8_xgodt")
 texture_hover = ExtResource("9_f8ru2")
 script = ExtResource("5_kex6g")
-scene = ExtResource("4_8o8k2")
+scene = 1
 
 [node name="BackWorkersButton" type="Button" parent="Camera2D/MainMenuSprite/Workers"]
 anchors_preset = 7
@@ -159,6 +164,5 @@ script = ExtResource("5_abq7c")
 [connection signal="pressed" from="Camera2D/MainMenuSprite/StartButton" to="Camera2D/MainMenuSprite/StartButton" method="on_pressed"]
 [connection signal="pressed" from="Camera2D/MainMenuSprite/SettingsButton" to="Camera2D/MainMenuSprite/SettingsButton" method="on_pressed"]
 [connection signal="pressed" from="Camera2D/MainMenuSprite/QuitButton" to="Camera2D/MainMenuSprite/QuitButton" method="_on_pressed"]
-[connection signal="pressed" from="Camera2D/MainMenuSprite/Workers/GridContainer/TextureButton" to="Camera2D/MainMenuSprite/Workers/GridContainer/TextureButton" method="_on_pressed"]
 [connection signal="pressed" from="Camera2D/MainMenuSprite/Workers/BackWorkersButton" to="Camera2D/MainMenuSprite/Workers" method="close"]
 [connection signal="pressed" from="Camera2D/MainMenuSprite/PlatformAssetSelector/BackSettingsButton" to="Camera2D/MainMenuSprite/PlatformAssetSelector" method="close"]

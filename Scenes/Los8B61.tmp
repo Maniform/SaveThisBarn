@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://c2hxfaoeriv0t"]
+
+[ext_resource type="Texture2D" uid="uid://bw0tdn4diw37e" path="res://Sprites/Lose.png" id="1_4sc2a"]
+[ext_resource type="AudioStream" uid="uid://d1ce2k73kaosr" path="res://Sounds/Music/Flim Flam Miracle Curative Tonic (8-Bit).wav" id="1_v4you"]
+[ext_resource type="StyleBox" uid="uid://bp55p0t74ysp4" path="res://Styles/LostFarmStyle.tres" id="2_ig7iy"]
+[ext_resource type="Script" path="res://Scripts/AudioStreamPlayerLoop.gd" id="2_vi03u"]
+[ext_resource type="Script" path="res://Scripts/UI/GoToSceneButton.gd" id="3_rko0a"]
+[ext_resource type="PackedScene" uid="uid://ymik4ne2syov" path="res://Scenes/MainMenu.tscn" id="6_2eeo2"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="LoseMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_v4you")
+autoplay = true
+script = ExtResource("2_vi03u")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D"]
+texture = ExtResource("1_4sc2a")
+
+[node name="Label" type="Label" parent="Camera2D/Sprite2D"]
+offset_left = 297.0
+offset_top = -513.0
+offset_right = 750.0
+offset_bottom = -376.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+theme_override_styles/normal = ExtResource("2_ig7iy")
+text = "FarmLost"
+autowrap_mode = 2
+
+[node name="MainMenuButton" type="Button" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -910.0
+offset_top = 346.0
+offset_right = -430.0
+offset_bottom = 490.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 50
+text = "MainMenu"
+script = ExtResource("3_rko0a")
+scene = ExtResource("6_2eeo2")

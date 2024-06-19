@@ -22,6 +22,7 @@ main_music="*res://Singletons/MainMusic.gd"
 player_controller="*res://Singletons/PlayerController.gd"
 game_config="*res://Singletons/GameConfig.gd"
 sound_effect="*res://Singletons/SoundEffect.gd"
+scene_manager="*res://Singletons/SceneManager.gd"
 
 [input]
 
