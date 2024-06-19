@@ -92,5 +92,4 @@ func victory_sound_effect_finished():
 func victory_music_finished():
 	main_music.finished.disconnect(victory_music_finished)
 	main_music.loop = true
-	main_music.play_music(main_music.default_music)
 	scene_manager.goto(win_scene)
