@@ -35,4 +35,4 @@ func _process(delta):
 				index += 1
 			var celebration_object = CelebrationObject.new(speed_factor)
 			celebration_object.texture = celebration_textures[index]
-			get_tree().root.add_child(celebration_object)
+			add_child(celebration_object)
