@@ -1,7 +1,8 @@
-[gd_scene load_steps=24 format=3 uid="uid://bmijdxt1hk5vr"]
+[gd_scene load_steps=27 format=3 uid="uid://bmijdxt1hk5vr"]
 
+[ext_resource type="Script" path="res://Scripts/Scenes/SceneUtils.gd" id="1_aigd7"]
 [ext_resource type="Script" path="res://Scripts/CelebrationSpawner.gd" id="1_rf7lk"]
-[ext_resource type="Script" path="res://GameModes/AppleSortGameMode.gd" id="1_tiu3p"]
+[ext_resource type="Script" path="res://Scripts/GameModes/AppleSortGameMode.gd" id="1_tiu3p"]
 [ext_resource type="SpriteFrames" uid="uid://btfhxsa6yxn15" path="res://Sprites/AppleSort/GS.tres" id="1_yftt8"]
 [ext_resource type="AudioStream" uid="uid://dlbfva775mrnn" path="res://Sounds/Yay.wav" id="2_ach2u"]
 [ext_resource type="Script" path="res://Sprites/AppleSort/GrannySmith.gd" id="2_p0nb0"]
@@ -23,17 +24,23 @@
 [ext_resource type="Texture2D" uid="uid://dbqeo5ufonkvc" path="res://Sprites/AppleSort/barrel.png" id="11_w7l6y"]
 [ext_resource type="StyleBox" uid="uid://25tmcp8c52af" path="res://Assets/AppleSpawner/BarrelProgressBarStyle.tres" id="12_wdvva"]
 [ext_resource type="Texture2D" uid="uid://c22mf5xbdssfn" path="res://Sprites/FlimAndFlam.png" id="22_1qdr4"]
+[ext_resource type="Script" path="res://Scripts/PlatformAssetSelector.gd" id="25_c3cvu"]
+[ext_resource type="StyleBox" uid="uid://dkx8xm0iph64a" path="res://Styles/AndroidAppleControlsStyle.tres" id="26_uvao5"]
 
 [node name="Node2D" type="Node2D"]
+
+[node name="SceneUtils" type="Node" parent="."]
+script = ExtResource("1_aigd7")
+scenes_to_preload = Array[int]([0, 2])
 
 [node name="AppleSortGameMode" type="Node" parent="." node_paths=PackedStringArray("current_apple_spawner", "apple_progress_bar", "barrel_progress_bar", "ff_apple_progress_bar", "ff_barrel_progress_bar", "celebration_spawner")]
 script = ExtResource("1_tiu3p")
 current_apple_spawner = NodePath("../Camera2D/GrannySmith/AppleSpawners/AppleSpawner0")
-apple_progress_bar = NodePath("../Camera2D/GrannySmith/AppleProgressBar/ProgressBar")
-barrel_progress_bar = NodePath("../Camera2D/GrannySmith/BarrelProgressBar/ProgressBar")
-ff_apple_progress_bar = NodePath("../Camera2D/GrannySmith/FFAppleProgressBar/ProgressBar")
-ff_barrel_progress_bar = NodePath("../Camera2D/GrannySmith/FFBarrelProgressBar/ProgressBar")
-ff_apple_delay = 0.5
+apple_progress_bar = NodePath("../Camera2D/GrannySmith/GrannyInfos/AppleProgressBar/ProgressBar")
+barrel_progress_bar = NodePath("../Camera2D/GrannySmith/GrannyInfos/BarrelProgressBar/ProgressBar")
+ff_apple_progress_bar = NodePath("../Camera2D/GrannySmith/FFInfos/FFAppleProgressBar/ProgressBar")
+ff_barrel_progress_bar = NodePath("../Camera2D/GrannySmith/FFInfos/FFBarrelProgressBar/ProgressBar")
+ff_apple_delay = 0.3
 celebration_spawner = NodePath("../CelebrationSpawner")
 victory_sound_effect = ExtResource("2_ach2u")
 victory_music = ExtResource("3_uk75t")
@@ -50,6 +57,8 @@ ExtResource("4_b0k6r"): 1.0,
 ExtResource("5_l8ico"): 1.0,
 ExtResource("6_asiex"): 0.1
 }
+object_generation_delay = 0.08
+speed_factor = Vector3(1, 1.2, 1)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -99,70 +108,84 @@ script = ExtResource("8_0sj65")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Camera2D/GrannySmith"]
 bus = &"Effects"
 
-[node name="AppleProgressBar" type="Node2D" parent="Camera2D/GrannySmith"]
-position = Vector2(-910, -490)
+[node name="GrannyInfos" type="ColorRect" parent="Camera2D/GrannySmith"]
+offset_left = -932.0
+offset_top = -514.0
+offset_right = -638.0
+offset_bottom = -124.0
+color = Color(1, 1, 1, 0.427451)
 
-[node name="ProgressBar" type="ProgressBar" parent="Camera2D/GrannySmith/AppleProgressBar"]
+[node name="AppleProgressBar" type="Node2D" parent="Camera2D/GrannySmith/GrannyInfos"]
+position = Vector2(22, 24)
+
+[node name="ProgressBar" type="ProgressBar" parent="Camera2D/GrannySmith/GrannyInfos/AppleProgressBar"]
 offset_right = 100.0
 offset_bottom = 250.0
 theme_override_styles/fill = ExtResource("10_js23d")
 fill_mode = 3
 show_percentage = false
 
-[node name="GoodApple" type="Sprite2D" parent="Camera2D/GrannySmith/AppleProgressBar"]
+[node name="GoodApple" type="Sprite2D" parent="Camera2D/GrannySmith/GrannyInfos/AppleProgressBar"]
 position = Vector2(50, 296)
 scale = Vector2(0.286667, 0.286667)
 texture = ExtResource("10_ba7y2")
 
-[node name="BarrelProgressBar" type="Node2D" parent="Camera2D/GrannySmith"]
-position = Vector2(-760, -490)
+[node name="BarrelProgressBar" type="Node2D" parent="Camera2D/GrannySmith/GrannyInfos"]
+position = Vector2(172, 24)
 
-[node name="ProgressBar" type="ProgressBar" parent="Camera2D/GrannySmith/BarrelProgressBar"]
+[node name="ProgressBar" type="ProgressBar" parent="Camera2D/GrannySmith/GrannyInfos/BarrelProgressBar"]
 offset_right = 100.0
 offset_bottom = 250.0
 theme_override_styles/fill = ExtResource("12_wdvva")
 fill_mode = 3
 show_percentage = false
 
-[node name="Sprite2D" type="Sprite2D" parent="Camera2D/GrannySmith/BarrelProgressBar"]
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D/GrannySmith/GrannyInfos/BarrelProgressBar"]
 position = Vector2(50, 300)
 scale = Vector2(0.024697, 0.024697)
 texture = ExtResource("11_w7l6y")
 
-[node name="FFAppleProgressBar" type="Node2D" parent="Camera2D/GrannySmith"]
-position = Vector2(660, -490)
+[node name="FFInfos" type="ColorRect" parent="Camera2D/GrannySmith"]
+offset_left = 288.0
+offset_top = -514.0
+offset_right = 937.0
+offset_bottom = -124.0
+color = Color(1, 1, 1, 0.427451)
 
-[node name="ProgressBar" type="ProgressBar" parent="Camera2D/GrannySmith/FFAppleProgressBar"]
-offset_right = 100.0
-offset_bottom = 250.0
-theme_override_styles/fill = ExtResource("10_js23d")
-fill_mode = 3
-show_percentage = false
-
-[node name="GoodApple" type="Sprite2D" parent="Camera2D/GrannySmith/FFAppleProgressBar"]
-position = Vector2(50, 296)
-scale = Vector2(0.286667, 0.286667)
-texture = ExtResource("10_ba7y2")
-
-[node name="FFBarrelProgressBar" type="Node2D" parent="Camera2D/GrannySmith"]
-position = Vector2(810, -490)
-
-[node name="ProgressBar" type="ProgressBar" parent="Camera2D/GrannySmith/FFBarrelProgressBar"]
-offset_right = 100.0
-offset_bottom = 250.0
-theme_override_styles/fill = ExtResource("12_wdvva")
-fill_mode = 3
-show_percentage = false
-
-[node name="Sprite2D" type="Sprite2D" parent="Camera2D/GrannySmith/FFBarrelProgressBar"]
-position = Vector2(50, 300)
-scale = Vector2(0.024697, 0.024697)
-texture = ExtResource("11_w7l6y")
-
-[node name="FlimAndFlam" type="Sprite2D" parent="Camera2D/GrannySmith"]
-position = Vector2(475, -363)
+[node name="FlimAndFlam" type="Sprite2D" parent="Camera2D/GrannySmith/FFInfos"]
+position = Vector2(187, 151)
 scale = Vector2(0.38381, 0.38381)
 texture = ExtResource("22_1qdr4")
+
+[node name="FFAppleProgressBar" type="Node2D" parent="Camera2D/GrannySmith/FFInfos"]
+position = Vector2(372, 24)
+
+[node name="ProgressBar" type="ProgressBar" parent="Camera2D/GrannySmith/FFInfos/FFAppleProgressBar"]
+offset_right = 100.0
+offset_bottom = 250.0
+theme_override_styles/fill = ExtResource("10_js23d")
+fill_mode = 3
+show_percentage = false
+
+[node name="GoodApple" type="Sprite2D" parent="Camera2D/GrannySmith/FFInfos/FFAppleProgressBar"]
+position = Vector2(50, 296)
+scale = Vector2(0.286667, 0.286667)
+texture = ExtResource("10_ba7y2")
+
+[node name="FFBarrelProgressBar" type="Node2D" parent="Camera2D/GrannySmith/FFInfos"]
+position = Vector2(522, 24)
+
+[node name="ProgressBar" type="ProgressBar" parent="Camera2D/GrannySmith/FFInfos/FFBarrelProgressBar"]
+offset_right = 100.0
+offset_bottom = 250.0
+theme_override_styles/fill = ExtResource("12_wdvva")
+fill_mode = 3
+show_percentage = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D/GrannySmith/FFInfos/FFBarrelProgressBar"]
+position = Vector2(50, 300)
+scale = Vector2(0.024697, 0.024697)
+texture = ExtResource("11_w7l6y")
 
 [node name="HalfScreenButtonLeft" type="TouchScreenButton" parent="Camera2D/GrannySmith"]
 visible = false
@@ -176,6 +199,53 @@ position = Vector2(480, 0)
 shape = ExtResource("8_7h2g3")
 script = ExtResource("9_6yjfh")
 emit_value = 1
+
+[node name="PlatformAssetSelector" type="Node2D" parent="Camera2D/GrannySmith" node_paths=PackedStringArray("AndroidAsset")]
+script = ExtResource("25_c3cvu")
+AndroidAsset = NodePath("AndroidControl")
+
+[node name="AndroidControl" type="Node2D" parent="Camera2D/GrannySmith/PlatformAssetSelector"]
+
+[node name="Good" type="Label" parent="Camera2D/GrannySmith/PlatformAssetSelector/AndroidControl"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 454.0
+offset_top = -30.0
+offset_right = 920.0
+offset_bottom = 176.0
+grow_horizontal = 0
+grow_vertical = 2
+rotation = -0.211185
+pivot_offset = Vector2(233, 103)
+theme_override_colors/font_color = Color(0, 0.517593, 3.85046e-07, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+theme_override_styles/normal = ExtResource("26_uvao5")
+text = "GoodA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Bad" type="Label" parent="Camera2D/GrannySmith/PlatformAssetSelector/AndroidControl"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -920.0
+offset_top = -30.0
+offset_right = -454.0
+offset_bottom = 176.0
+grow_vertical = 2
+rotation = 0.211185
+pivot_offset = Vector2(233, 103)
+theme_override_colors/font_color = Color(1, 0.116114, 0.146929, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+theme_override_styles/normal = ExtResource("26_uvao5")
+text = "BadA"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="animation_finished" from="Camera2D/GrannySmith" to="Camera2D/GrannySmith" method="_on_animation_finished"]
 [connection signal="apple_thrown" from="Camera2D/GrannySmith" to="Camera2D/GrannySmith/AppleSpawners" method="change"]

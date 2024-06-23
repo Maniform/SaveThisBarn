@@ -1,13 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://c2hxfaoeriv0t"]
+[gd_scene load_steps=8 format=3 uid="uid://c2hxfaoeriv0t"]
 
 [ext_resource type="Texture2D" uid="uid://bw0tdn4diw37e" path="res://Sprites/Lose.png" id="1_4sc2a"]
 [ext_resource type="Script" path="res://Scripts/Music/MainMusicPlayer.gd" id="1_6bm3x"]
 [ext_resource type="AudioStream" uid="uid://d1ce2k73kaosr" path="res://Sounds/Music/Flim Flam Miracle Curative Tonic (8-Bit).wav" id="1_v4you"]
+[ext_resource type="Script" path="res://Scripts/Scenes/SceneUtils.gd" id="1_wum50"]
 [ext_resource type="StyleBox" uid="uid://bp55p0t74ysp4" path="res://Styles/LostFarmStyle.tres" id="2_ig7iy"]
 [ext_resource type="Script" path="res://Scripts/UI/GoToSceneButton.gd" id="3_rko0a"]
 [ext_resource type="Script" path="res://Scripts/Sprite2DViewportScaler.gd" id="4_vcbjs"]
 
 [node name="Node2D" type="Node2D"]
+
+[node name="SceneUtils" type="Node" parent="."]
+script = ExtResource("1_wum50")
+scenes_to_preload = Array[int]([0])
 
 [node name="MainMusicPlayer" type="Node" parent="."]
 script = ExtResource("1_6bm3x")

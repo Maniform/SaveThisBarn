@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Save This Barn"
-config/version="0.1.2"
+config/version="0.1.3"
 run/main_scene="res://Scenes/MainMenu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://Sprites/MainMenu/Icon.png"
@@ -23,6 +23,7 @@ player_controller="*res://Singletons/PlayerController.gd"
 game_config="*res://Singletons/GameConfig.gd"
 sound_effect="*res://Singletons/SoundEffect.gd"
 scene_manager="*res://Singletons/SceneManager.gd"
+main_game_flow="*res://Singletons/GameFlow/MainGameFlow.gd"
 
 [input]
 

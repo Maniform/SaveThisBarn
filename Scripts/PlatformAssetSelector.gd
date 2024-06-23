@@ -9,9 +9,9 @@ var platform_string:= ["Windows", "Android"] as Array[String]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if OS.get_name() != platform_string[PLATFORM.WINDOWS]:
+	if OS.get_name() != platform_string[PLATFORM.WINDOWS] and WindowsAsset != null:
 		WindowsAsset.visible = false
-	if OS.get_name() != platform_string[PLATFORM.ANDROID]:
+	if OS.get_name() != platform_string[PLATFORM.ANDROID] and AndroidAsset != null:
 		AndroidAsset.visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

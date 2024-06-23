@@ -3,6 +3,7 @@ class_name CelebrationSpawner extends Node
 @export var objects: Dictionary
 @export var activated:= false as bool
 @export var object_generation_delay:= 0.1 as float
+@export var speed_factor = Vector3(1, 1, 1)
 
 var celebration_textures: Array[Texture2D]
 var celebration_objects_rate: Array[float]
@@ -32,6 +33,6 @@ func _process(delta):
 				if rvalue <= 0:
 					break
 				index += 1
-			var celebration_object = CelebrationObject.new()
+			var celebration_object = CelebrationObject.new(speed_factor)
 			celebration_object.texture = celebration_textures[index]
 			get_tree().root.add_child(celebration_object)

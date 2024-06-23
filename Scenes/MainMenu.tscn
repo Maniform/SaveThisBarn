@@ -1,5 +1,6 @@
-[gd_scene load_steps=17 format=3 uid="uid://ymik4ne2syov"]
+[gd_scene load_steps=18 format=3 uid="uid://ymik4ne2syov"]
 
+[ext_resource type="Script" path="res://Scripts/Scenes/SceneUtils.gd" id="1_axkvy"]
 [ext_resource type="Texture2D" uid="uid://dsia6qysqojq0" path="res://Sprites/MainMenu/Intro.png" id="1_jqn87"]
 [ext_resource type="Script" path="res://Scripts/Music/MainMusicPlayer.gd" id="1_l3w6x"]
 [ext_resource type="AudioStream" uid="uid://3ulhds1542ha" path="res://Sounds/Music/Ponytune – Raise This Barn 8-bit.wav" id="2_k3q1u"]
@@ -17,7 +18,11 @@
 [ext_resource type="PackedScene" uid="uid://ornekx1e255q" path="res://Assets/UI/windows_settings.tscn" id="13_gst54"]
 [ext_resource type="PackedScene" uid="uid://cnucwa0vglkc2" path="res://Assets/UI/android_settings.tscn" id="14_qs56e"]
 
-[node name="Node2D" type="Node2D"]
+[node name="MainMenu" type="Node2D"]
+
+[node name="SceneUtils" type="Node" parent="."]
+script = ExtResource("1_axkvy")
+scenes_to_preload = Array[int]([1])
 
 [node name="MainMusicPlayer" type="Node" parent="."]
 script = ExtResource("1_l3w6x")
