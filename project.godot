@@ -23,7 +23,6 @@ player_controller="*res://Singletons/PlayerController.gd"
 game_config="*res://Singletons/GameConfig.gd"
 sound_effect="*res://Singletons/SoundEffect.gd"
 scene_manager="*res://Singletons/SceneManager.gd"
-main_game_flow="*res://Singletons/GameFlow/MainGameFlow.gd"
 
 [input]
 
