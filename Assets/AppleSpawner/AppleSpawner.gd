@@ -1,20 +1,28 @@
-class_name AppleSpawner extends AnimatedSprite2D
+class_name AppleSpawner extends Node2D
 
-@export var bad_apple_rate := 0.5 as float
+@export_range(0, 1) var bad_apple_rate:= 0.5 as float
+
+var apple_spawners: Array[Sprite2D]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	change()
+	for child in get_children():
+		if child is Sprite2D:
+			apple_spawners.append(child)
+			child.frame = generate_apple()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
-func set_apple_state(is_good: bool):
-	frame = !is_good
+func is_current_apple_good() -> bool:
+	return bool(!apple_spawners[0].frame)
 
-func is_apple_good() -> bool:
-	return bool(!frame)
+func generate_apple() -> int:
+	return randf() < bad_apple_rate
 
 func change():
-	set_apple_state(randf() > bad_apple_rate)
+	for i in range(0, apple_spawners.size() - 1):
+		apple_spawners[i].frame = apple_spawners[i+1].frame
+	var bad_apple = generate_apple()
+	apple_spawners[apple_spawners.size() - 1].frame = bad_apple

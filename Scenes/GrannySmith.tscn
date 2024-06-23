@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://d35akkkf5qifd" path="res://Assets/UI/Countdown/countdown.tscn" id="5_44wpx"]
 [ext_resource type="Texture2D" uid="uid://cknxst83da8d6" path="res://Sprites/Celebration/Apple/AJ_Happy3.png" id="5_l8ico"]
 [ext_resource type="Texture2D" uid="uid://dtlev7hf6y6ia" path="res://Sprites/Celebration/Apple/AJ_Happy4.png" id="6_asiex"]
-[ext_resource type="Script" path="res://Assets/AppleSpawner/AppleSpawners.gd" id="6_j6mm1"]
+[ext_resource type="Script" path="res://Assets/AppleSpawner/AppleSpawner.gd" id="6_j6mm1"]
 [ext_resource type="Shape2D" uid="uid://bihrgctlsn5ex" path="res://TouchControl/MidScreenTouchRect.tres" id="8_7h2g3"]
 [ext_resource type="Script" path="res://TouchControl/TouchScreenButton.gd" id="9_6yjfh"]
 [ext_resource type="Texture2D" uid="uid://s0xbgg1apdcw" path="res://Assets/AppleSpawner/GoodApple.png" id="10_ba7y2"]
@@ -32,9 +32,9 @@
 script = ExtResource("1_aigd7")
 scenes_to_preload = Array[int]([0, 2])
 
-[node name="AppleSortGameMode" type="Node" parent="." node_paths=PackedStringArray("apple_spawners", "apple_progress_bar", "barrel_progress_bar", "ff_apple_progress_bar", "ff_barrel_progress_bar", "celebration_spawner")]
+[node name="AppleSortGameMode" type="Node" parent="." node_paths=PackedStringArray("apple_spawner", "apple_progress_bar", "barrel_progress_bar", "ff_apple_progress_bar", "ff_barrel_progress_bar", "celebration_spawner")]
 script = ExtResource("1_tiu3p")
-apple_spawners = NodePath("../Camera2D/GrannySmith/ColorRect/AppleSpawners")
+apple_spawner = NodePath("../Camera2D/GrannySmith/ColorRect/AppleSpawners")
 apple_progress_bar = NodePath("../Camera2D/GrannySmith/GrannyInfos/AppleProgressBar/ProgressBar")
 barrel_progress_bar = NodePath("../Camera2D/GrannySmith/GrannyInfos/BarrelProgressBar/ProgressBar")
 ff_apple_progress_bar = NodePath("../Camera2D/GrannySmith/FFInfos/FFAppleProgressBar/ProgressBar")
