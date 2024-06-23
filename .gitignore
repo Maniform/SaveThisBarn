@@ -1,7 +1,11 @@
 # Godot 4+ specific ignores
 .godot/
 
+# Generated files
+*.translation
+
 # Built files
 *.apk
+*.idsig
 *.exe
 *.pck
