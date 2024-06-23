@@ -2,7 +2,7 @@ class_name AppleSortGameMode extends Node
 
 @export var barrels_objective:= 5 as int
 @export var apple_per_barrel:= 10 as int
-@export var current_apple_spawner: AppleSpawner
+@export var apple_spawners: AppleSpawners
 @export var apple_progress_bar: ProgressBar
 @export var barrel_progress_bar: ProgressBar
 @export var ff_apple_progress_bar: ProgressBar
@@ -38,7 +38,7 @@ func _process(delta):
 
 func on_apple_thrown(is_good: bool):
 	if is_good:
-		if current_apple_spawner.is_apple_good():
+		if apple_spawners.is_current_apple_good():
 			add_apple()
 		else:
 			remove_apple()

@@ -13,7 +13,7 @@ func _process(delta):
 func set_apple_state(is_good: bool):
 	frame = !is_good
 
-func is_apple_good():
+func is_apple_good() -> bool:
 	return bool(!frame)
 
 func change():

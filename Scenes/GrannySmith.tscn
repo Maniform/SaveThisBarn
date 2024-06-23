@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bmijdxt1hk5vr"]
+[gd_scene load_steps=26 format=3 uid="uid://bmijdxt1hk5vr"]
 
 [ext_resource type="Script" path="res://Scripts/Scenes/SceneUtils.gd" id="1_aigd7"]
 [ext_resource type="Script" path="res://Scripts/CelebrationSpawner.gd" id="1_rf7lk"]
@@ -16,14 +16,13 @@
 [ext_resource type="Texture2D" uid="uid://cknxst83da8d6" path="res://Sprites/Celebration/Apple/AJ_Happy3.png" id="5_l8ico"]
 [ext_resource type="Texture2D" uid="uid://dtlev7hf6y6ia" path="res://Sprites/Celebration/Apple/AJ_Happy4.png" id="6_asiex"]
 [ext_resource type="Script" path="res://Assets/AppleSpawner/AppleSpawners.gd" id="6_j6mm1"]
-[ext_resource type="SpriteFrames" uid="uid://bw50vlerqq2gl" path="res://Assets/AppleSpawner/Apples.tres" id="7_iwr0m"]
-[ext_resource type="Script" path="res://Assets/AppleSpawner/AppleSpawner.gd" id="8_0sj65"]
 [ext_resource type="Shape2D" uid="uid://bihrgctlsn5ex" path="res://TouchControl/MidScreenTouchRect.tres" id="8_7h2g3"]
 [ext_resource type="Script" path="res://TouchControl/TouchScreenButton.gd" id="9_6yjfh"]
 [ext_resource type="Texture2D" uid="uid://s0xbgg1apdcw" path="res://Assets/AppleSpawner/GoodApple.png" id="10_ba7y2"]
 [ext_resource type="StyleBox" uid="uid://dru30wuyh2xfv" path="res://Assets/AppleSpawner/AppleProgressBarStyle.tres" id="10_js23d"]
 [ext_resource type="Texture2D" uid="uid://dbqeo5ufonkvc" path="res://Sprites/AppleSort/barrel.png" id="11_w7l6y"]
 [ext_resource type="StyleBox" uid="uid://25tmcp8c52af" path="res://Assets/AppleSpawner/BarrelProgressBarStyle.tres" id="12_wdvva"]
+[ext_resource type="PackedScene" uid="uid://v5rm60s3gtx8" path="res://Assets/AppleSpawner/apple.tscn" id="17_gmnal"]
 [ext_resource type="Texture2D" uid="uid://c22mf5xbdssfn" path="res://Sprites/FlimAndFlam.png" id="22_1qdr4"]
 [ext_resource type="StyleBox" uid="uid://dkx8xm0iph64a" path="res://Styles/AndroidAppleControlsStyle.tres" id="26_uvao5"]
 
@@ -33,9 +32,9 @@
 script = ExtResource("1_aigd7")
 scenes_to_preload = Array[int]([0, 2])
 
-[node name="AppleSortGameMode" type="Node" parent="." node_paths=PackedStringArray("current_apple_spawner", "apple_progress_bar", "barrel_progress_bar", "ff_apple_progress_bar", "ff_barrel_progress_bar", "celebration_spawner")]
+[node name="AppleSortGameMode" type="Node" parent="." node_paths=PackedStringArray("apple_spawners", "apple_progress_bar", "barrel_progress_bar", "ff_apple_progress_bar", "ff_barrel_progress_bar", "celebration_spawner")]
 script = ExtResource("1_tiu3p")
-current_apple_spawner = NodePath("../Camera2D/GrannySmith/ColorRect/AppleSpawners/AppleSpawner0")
+apple_spawners = NodePath("../Camera2D/GrannySmith/ColorRect/AppleSpawners")
 apple_progress_bar = NodePath("../Camera2D/GrannySmith/GrannyInfos/AppleProgressBar/ProgressBar")
 barrel_progress_bar = NodePath("../Camera2D/GrannySmith/GrannyInfos/BarrelProgressBar/ProgressBar")
 ff_apple_progress_bar = NodePath("../Camera2D/GrannySmith/FFInfos/FFAppleProgressBar/ProgressBar")
@@ -104,37 +103,27 @@ color = Color(1, 1, 1, 0.431373)
 position = Vector2(688, 87)
 script = ExtResource("6_j6mm1")
 
-[node name="AppleSpawner0" type="AnimatedSprite2D" parent="Camera2D/GrannySmith/ColorRect/AppleSpawners"]
-scale = Vector2(0.49, 0.49)
-sprite_frames = ExtResource("7_iwr0m")
-script = ExtResource("8_0sj65")
+[node name="Apple0" parent="Camera2D/GrannySmith/ColorRect/AppleSpawners" instance=ExtResource("17_gmnal")]
+scale = Vector2(0.5, 0.5)
 
-[node name="AppleSpawner1" type="AnimatedSprite2D" parent="Camera2D/GrannySmith/ColorRect/AppleSpawners"]
+[node name="Apple1" parent="Camera2D/GrannySmith/ColorRect/AppleSpawners" instance=ExtResource("17_gmnal")]
 position = Vector2(-150, 0)
-scale = Vector2(0.49, 0.49)
-sprite_frames = ExtResource("7_iwr0m")
-script = ExtResource("8_0sj65")
+scale = Vector2(0.5, 0.5)
 
-[node name="AppleSpawner2" type="AnimatedSprite2D" parent="Camera2D/GrannySmith/ColorRect/AppleSpawners"]
+[node name="Apple2" parent="Camera2D/GrannySmith/ColorRect/AppleSpawners" instance=ExtResource("17_gmnal")]
 modulate = Color(1, 1, 1, 0.784314)
 position = Vector2(-300, 0)
-scale = Vector2(0.49, 0.49)
-sprite_frames = ExtResource("7_iwr0m")
-script = ExtResource("8_0sj65")
+scale = Vector2(0.5, 0.5)
 
-[node name="AppleSpawner3" type="AnimatedSprite2D" parent="Camera2D/GrannySmith/ColorRect/AppleSpawners"]
+[node name="Apple3" parent="Camera2D/GrannySmith/ColorRect/AppleSpawners" instance=ExtResource("17_gmnal")]
 modulate = Color(1, 1, 1, 0.588235)
 position = Vector2(-450, 0)
-scale = Vector2(0.49, 0.49)
-sprite_frames = ExtResource("7_iwr0m")
-script = ExtResource("8_0sj65")
+scale = Vector2(0.5, 0.5)
 
-[node name="AppleSpawner4" type="AnimatedSprite2D" parent="Camera2D/GrannySmith/ColorRect/AppleSpawners"]
+[node name="Apple4" parent="Camera2D/GrannySmith/ColorRect/AppleSpawners" instance=ExtResource("17_gmnal")]
 modulate = Color(1, 1, 1, 0.392157)
 position = Vector2(-600, 0)
-scale = Vector2(0.49, 0.49)
-sprite_frames = ExtResource("7_iwr0m")
-script = ExtResource("8_0sj65")
+scale = Vector2(0.5, 0.5)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Camera2D/GrannySmith"]
 bus = &"Effects"

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://v5rm60s3gtx8"]
+
+[ext_resource type="Texture2D" uid="uid://eicwyps752ib" path="res://Assets/AppleSpawner/Apples.png" id="1_jprpt"]
+
+[node name="Apple" type="Sprite2D"]
+texture = ExtResource("1_jprpt")
+hframes = 2
