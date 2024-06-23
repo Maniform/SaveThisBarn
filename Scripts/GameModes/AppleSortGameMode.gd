@@ -14,9 +14,11 @@ class_name AppleSortGameMode extends Node
 @export var win_scene: SceneManager.SCENE
 @export var lose_scene: SceneManager.SCENE
 
+@onready var ff_timer:= $FFTimer as Timer
+@onready var countdown:= $Countdown as Countdown
+
 var apples:= 0 as int
 var barrels:= 0 as int
-var ff_timer: Timer
 var ff_apples:= 0 as int
 var ff_barrels:= 0 as int
 
@@ -26,10 +28,9 @@ func _ready():
 	barrel_progress_bar.max_value = barrels_objective
 	ff_apple_progress_bar.max_value = apple_per_barrel
 	ff_barrel_progress_bar.max_value = barrels_objective
-	ff_timer = get_child(0)
 	ff_timer.timeout.connect(add_ff_apple)
-	ff_timer.start(ff_apple_delay)
-	player_controller.input_game_mode = PlayerController.INPUT_GAME_MODE.GAME
+	countdown.finished.connect(start)
+	countdown.start()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -67,6 +68,11 @@ func add_ff_apple(number:= 1 as int):
 			if ff_barrels == barrels_objective:
 				lose()
 	ff_apple_progress_bar.value = ff_apples
+
+func start():
+	countdown.queue_free()
+	ff_timer.start(ff_apple_delay)
+	player_controller.input_game_mode = PlayerController.INPUT_GAME_MODE.GAME
 
 func win():
 	ff_timer.stop()

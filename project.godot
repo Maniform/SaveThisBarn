@@ -36,6 +36,11 @@ ui_toggle_fullscreen={
 [internationalization]
 
 locale/translation_remaps={
+"res://Sounds/GrannySmith/AJ-1234_en.wav": PackedStringArray("res://Sounds/GrannySmith/AJ-1234_fr.wav:fr"),
+"res://Sounds/GrannySmith/AJ-1_en.wav": PackedStringArray("res://Sounds/GrannySmith/AJ-1_fr.wav:fr"),
+"res://Sounds/GrannySmith/AJ-2_en.wav": PackedStringArray("res://Sounds/GrannySmith/AJ-2_fr.wav:fr"),
+"res://Sounds/GrannySmith/AJ-3_en.wav": PackedStringArray("res://Sounds/GrannySmith/AJ-3_fr.wav:fr"),
+"res://Sounds/GrannySmith/AJ-4_en.wav": PackedStringArray("res://Sounds/GrannySmith/AJ-4_fr.wav:fr"),
 "res://Sounds/GrannySmith/GS_Bad_en.wav": PackedStringArray("res://Sounds/GrannySmith/GS_Bad_fr.wav:fr"),
 "res://Sounds/GrannySmith/GS_Good_en.wav": PackedStringArray("res://Sounds/GrannySmith/GS_Good_fr.wav:fr")
 }
