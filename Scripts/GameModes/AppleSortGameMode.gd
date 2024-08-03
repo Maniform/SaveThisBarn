@@ -1,5 +1,13 @@
 class_name AppleSortGameMode extends Node
 
+class DifficultyValues:
+	var ff_apple_delay:= 1 as float
+	var celebration_spawner_delay:= 1 as float
+	
+	func _init(_ff_apple_delay, _celebration_spawner_delay):
+		ff_apple_delay = _ff_apple_delay
+		celebration_spawner_delay = _celebration_spawner_delay
+
 @export var barrels_objective:= 5 as int
 @export var apple_per_barrel:= 10 as int
 @export var apple_spawner: AppleSpawner
@@ -15,6 +23,11 @@ class_name AppleSortGameMode extends Node
 @export var lose_scene: SceneManager.SCENE
 
 @export var elementsToShowOnDifficulty: Array[Control]
+var difficultyOverrides = {
+	DifficultyChooser.Difficulty.EASY: DifficultyValues.new(0.5, 0.5),
+	DifficultyChooser.Difficulty.NORMAL: DifficultyValues.new(0.3, 0.3),
+	DifficultyChooser.Difficulty.HARD: DifficultyValues.new(0.2, 0.08)
+}
 
 @onready var ff_timer:= $FFTimer as Timer
 @onready var countdown:= $Countdown as Countdown
@@ -30,6 +43,12 @@ func _ready():
 	barrel_progress_bar.max_value = barrels_objective
 	ff_apple_progress_bar.max_value = apple_per_barrel - 1
 	ff_barrel_progress_bar.max_value = barrels_objective
+	
+	apple_progress_bar.value = apples
+	barrel_progress_bar.value = barrels
+	ff_apple_progress_bar.value = ff_apples
+	ff_barrel_progress_bar.value = ff_barrels
+	
 	ff_timer.timeout.connect(add_ff_apple)
 	countdown.finished.connect(start)
 	
@@ -73,11 +92,12 @@ func add_ff_apple(number:= 1 as int):
 				lose()
 	ff_apple_progress_bar.value = ff_apples
 
-func set_difficulty(value: float):
+func set_difficulty(difficulty: DifficultyChooser.Difficulty):
 	for elem in elementsToShowOnDifficulty:
 		elem.visible = true
 	
-	ff_apple_delay = value
+	ff_apple_delay = difficultyOverrides[difficulty].ff_apple_delay
+	celebration_spawner.object_generation_delay = difficultyOverrides[difficulty].celebration_spawner_delay
 	start_countdown()
 
 func start_countdown():

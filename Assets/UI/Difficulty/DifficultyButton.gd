@@ -1,8 +1,8 @@
 class_name DifficultyButton extends Button
 
-@export var value:= 1 as float
+@export var difficulty:= DifficultyChooser.Difficulty.NORMAL as DifficultyChooser.Difficulty
 
-signal difficulty_selected(value: float)
+signal difficulty_selected(difficulty: DifficultyChooser.Difficulty)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,4 +14,4 @@ func _process(delta):
 	pass
 
 func send_difficulty():
-	difficulty_selected.emit(value)
+	difficulty_selected.emit(difficulty)
