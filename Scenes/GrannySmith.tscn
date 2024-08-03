@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bmijdxt1hk5vr"]
+[gd_scene load_steps=27 format=3 uid="uid://bmijdxt1hk5vr"]
 
 [ext_resource type="Script" path="res://Scripts/Scenes/SceneUtils.gd" id="1_aigd7"]
 [ext_resource type="Script" path="res://Scripts/CelebrationSpawner.gd" id="1_rf7lk"]
@@ -24,6 +24,7 @@
 [ext_resource type="StyleBox" uid="uid://25tmcp8c52af" path="res://Assets/AppleSpawner/BarrelProgressBarStyle.tres" id="12_wdvva"]
 [ext_resource type="PackedScene" uid="uid://v5rm60s3gtx8" path="res://Assets/AppleSpawner/apple.tscn" id="17_gmnal"]
 [ext_resource type="Texture2D" uid="uid://c22mf5xbdssfn" path="res://Sprites/FlimAndFlam.png" id="22_1qdr4"]
+[ext_resource type="PackedScene" uid="uid://bkxcyrvwq7wyk" path="res://Assets/UI/Difficulty/difficulty_chooser.tscn" id="26_he7rp"]
 [ext_resource type="StyleBox" uid="uid://dkx8xm0iph64a" path="res://Styles/AndroidAppleControlsStyle.tres" id="26_uvao5"]
 
 [node name="Node2D" type="Node2D"]
@@ -32,9 +33,9 @@
 script = ExtResource("1_aigd7")
 scenes_to_preload = Array[int]([0, 2])
 
-[node name="AppleSortGameMode" type="Node" parent="." node_paths=PackedStringArray("apple_spawner", "apple_progress_bar", "barrel_progress_bar", "ff_apple_progress_bar", "ff_barrel_progress_bar", "celebration_spawner")]
+[node name="AppleSortGameMode" type="Node" parent="." node_paths=PackedStringArray("apple_spawner", "apple_progress_bar", "barrel_progress_bar", "ff_apple_progress_bar", "ff_barrel_progress_bar", "celebration_spawner", "elementsToShowOnDifficulty")]
 script = ExtResource("1_tiu3p")
-apple_spawner = NodePath("../Camera2D/GrannySmith/ColorRect/AppleSpawners")
+apple_spawner = NodePath("../Camera2D/GrannySmith/AppleSpawner/AppleSpawners")
 apple_progress_bar = NodePath("../Camera2D/GrannySmith/GrannyInfos/AppleProgressBar/ProgressBar")
 barrel_progress_bar = NodePath("../Camera2D/GrannySmith/GrannyInfos/BarrelProgressBar/ProgressBar")
 ff_apple_progress_bar = NodePath("../Camera2D/GrannySmith/FFInfos/FFAppleProgressBar/ProgressBar")
@@ -44,6 +45,7 @@ celebration_spawner = NodePath("../CelebrationSpawner")
 victory_sound_effect = ExtResource("2_ach2u")
 victory_music = ExtResource("3_uk75t")
 lose_scene = 2
+elementsToShowOnDifficulty = [NodePath("../Camera2D/GrannySmith/GrannyInfos"), NodePath("../Camera2D/GrannySmith/FFInfos"), NodePath("../Camera2D/GrannySmith/Directions/Good"), NodePath("../Camera2D/GrannySmith/Directions/Bad"), NodePath("../Camera2D/GrannySmith/AppleSpawner")]
 
 [node name="FFTimer" type="Timer" parent="AppleSortGameMode"]
 
@@ -92,35 +94,35 @@ script = ExtResource("2_p0nb0")
 good_sound = ExtResource("3_305wk")
 bad_sound = ExtResource("4_0h7t7")
 
-[node name="ColorRect" type="ColorRect" parent="Camera2D/GrannySmith"]
+[node name="AppleSpawner" type="ColorRect" parent="Camera2D/GrannySmith"]
 offset_left = -688.0
 offset_top = 307.0
 offset_right = 88.0
 offset_bottom = 490.0
 color = Color(1, 1, 1, 0.431373)
 
-[node name="AppleSpawners" type="Node2D" parent="Camera2D/GrannySmith/ColorRect"]
+[node name="AppleSpawners" type="Node2D" parent="Camera2D/GrannySmith/AppleSpawner"]
 position = Vector2(688, 87)
 script = ExtResource("6_j6mm1")
 
-[node name="Apple0" parent="Camera2D/GrannySmith/ColorRect/AppleSpawners" instance=ExtResource("17_gmnal")]
+[node name="Apple0" parent="Camera2D/GrannySmith/AppleSpawner/AppleSpawners" instance=ExtResource("17_gmnal")]
 scale = Vector2(0.5, 0.5)
 
-[node name="Apple1" parent="Camera2D/GrannySmith/ColorRect/AppleSpawners" instance=ExtResource("17_gmnal")]
+[node name="Apple1" parent="Camera2D/GrannySmith/AppleSpawner/AppleSpawners" instance=ExtResource("17_gmnal")]
 position = Vector2(-150, 0)
 scale = Vector2(0.5, 0.5)
 
-[node name="Apple2" parent="Camera2D/GrannySmith/ColorRect/AppleSpawners" instance=ExtResource("17_gmnal")]
+[node name="Apple2" parent="Camera2D/GrannySmith/AppleSpawner/AppleSpawners" instance=ExtResource("17_gmnal")]
 modulate = Color(1, 1, 1, 0.784314)
 position = Vector2(-300, 0)
 scale = Vector2(0.5, 0.5)
 
-[node name="Apple3" parent="Camera2D/GrannySmith/ColorRect/AppleSpawners" instance=ExtResource("17_gmnal")]
+[node name="Apple3" parent="Camera2D/GrannySmith/AppleSpawner/AppleSpawners" instance=ExtResource("17_gmnal")]
 modulate = Color(1, 1, 1, 0.588235)
 position = Vector2(-450, 0)
 scale = Vector2(0.5, 0.5)
 
-[node name="Apple4" parent="Camera2D/GrannySmith/ColorRect/AppleSpawners" instance=ExtResource("17_gmnal")]
+[node name="Apple4" parent="Camera2D/GrannySmith/AppleSpawner/AppleSpawners" instance=ExtResource("17_gmnal")]
 modulate = Color(1, 1, 1, 0.392157)
 position = Vector2(-600, 0)
 scale = Vector2(0.5, 0.5)
@@ -263,8 +265,11 @@ text = "BadA"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="DifficultyChooser" parent="Camera2D" instance=ExtResource("26_he7rp")]
+
 [connection signal="animation_finished" from="Camera2D/GrannySmith" to="Camera2D/GrannySmith" method="_on_animation_finished"]
-[connection signal="apple_thrown" from="Camera2D/GrannySmith" to="Camera2D/GrannySmith/ColorRect/AppleSpawners" method="change"]
+[connection signal="apple_thrown" from="Camera2D/GrannySmith" to="Camera2D/GrannySmith/AppleSpawner/AppleSpawners" method="change"]
 [connection signal="apple_thrown_choice" from="Camera2D/GrannySmith" to="AppleSortGameMode" method="on_apple_thrown"]
 [connection signal="pressed_direction" from="Camera2D/GrannySmith/HalfScreenButtonLeft" to="Camera2D/GrannySmith" method="select_apple"]
 [connection signal="pressed_direction" from="Camera2D/GrannySmith/HalfScreenButtonRight" to="Camera2D/GrannySmith" method="select_apple"]
+[connection signal="difficulty_selected" from="Camera2D/DifficultyChooser" to="AppleSortGameMode" method="set_difficulty"]

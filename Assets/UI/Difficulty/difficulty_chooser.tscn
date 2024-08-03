@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://bkxcyrvwq7wyk"]
+
+[ext_resource type="Script" path="res://Assets/UI/Difficulty/DifficultyChooser.gd" id="1_haugr"]
+[ext_resource type="Script" path="res://Assets/UI/Difficulty/DifficultyButton.gd" id="1_va37g"]
+
+[node name="DifficultyChooser" type="Control" node_paths=PackedStringArray("difficultyButtons")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1152.0
+offset_bottom = -648.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_haugr")
+difficultyButtons = [NodePath("CenterContainer/VBoxContainer/EasyButton"), NodePath("CenterContainer/VBoxContainer/NormalButton"), NodePath("CenterContainer/VBoxContainer/HardButton")]
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+offset_top = 12.0
+offset_right = 1136.0
+offset_bottom = 613.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="EasyButton" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "Easy"
+script = ExtResource("1_va37g")
+
+[node name="NormalButton" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "Normal"
+script = ExtResource("1_va37g")
+value = 0.3
+
+[node name="HardButton" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "Hard"
+script = ExtResource("1_va37g")
+value = 0.2

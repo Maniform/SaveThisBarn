@@ -14,6 +14,8 @@ class_name AppleSortGameMode extends Node
 @export var win_scene: SceneManager.SCENE
 @export var lose_scene: SceneManager.SCENE
 
+@export var elementsToShowOnDifficulty: Array[Control]
+
 @onready var ff_timer:= $FFTimer as Timer
 @onready var countdown:= $Countdown as Countdown
 
@@ -24,13 +26,15 @@ var ff_barrels:= 0 as int
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	apple_progress_bar.max_value = apple_per_barrel
+	apple_progress_bar.max_value = apple_per_barrel - 1
 	barrel_progress_bar.max_value = barrels_objective
-	ff_apple_progress_bar.max_value = apple_per_barrel
+	ff_apple_progress_bar.max_value = apple_per_barrel - 1
 	ff_barrel_progress_bar.max_value = barrels_objective
 	ff_timer.timeout.connect(add_ff_apple)
 	countdown.finished.connect(start)
-	countdown.start()
+	
+	for elem in elementsToShowOnDifficulty:
+		elem.visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -68,6 +72,16 @@ func add_ff_apple(number:= 1 as int):
 			if ff_barrels == barrels_objective:
 				lose()
 	ff_apple_progress_bar.value = ff_apples
+
+func set_difficulty(value: float):
+	for elem in elementsToShowOnDifficulty:
+		elem.visible = true
+	
+	ff_apple_delay = value
+	start_countdown()
+
+func start_countdown():
+	countdown.start()
 
 func start():
 	countdown.queue_free()
