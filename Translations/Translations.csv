@@ -10,3 +10,6 @@ QuitGame,Quit,Quitter
 FarmLost,You lost the farm.,Vous avez perdu la ferme.
 GoodA,Good,Bonne
 BadA,Bad,Pourrie
+EasyDifficulty,Easy,Facile
+NormalDifficulty,Normal,Normal
+HardDifficulty,Hard,Difficile

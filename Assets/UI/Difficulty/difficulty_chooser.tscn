@@ -28,19 +28,19 @@ theme_override_constants/separation = 50
 [node name="EasyButton" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
-text = "Easy"
+text = "EasyDifficulty"
 script = ExtResource("1_va37g")
 
 [node name="NormalButton" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
-text = "Normal"
+text = "NormalDifficulty"
 script = ExtResource("1_va37g")
 value = 0.3
 
 [node name="HardButton" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
-text = "Hard"
+text = "HardDifficulty"
 script = ExtResource("1_va37g")
 value = 0.2
