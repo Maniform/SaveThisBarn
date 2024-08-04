@@ -9,7 +9,8 @@ func _ready():
 		if saveFile.is_open():
 			var saveDict = saveFile.get_var()
 			if saveDict is Dictionary:
-				hardWinButton.visible = saveDict.get("HardVictory", false) as bool
+				if saveDict.get("Version", "0") == ProjectSettings.get_setting("application/config/version", "invalid"):
+					hardWinButton.visible = saveDict.get("HardVictory", false) as bool
 			saveFile.close()
 
 

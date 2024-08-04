@@ -1,6 +1,6 @@
 class_name DifficultyChooser extends CenterContainer
 
-enum Difficulty { EASY, NORMAL, HARD }
+enum Difficulty { EASY, NORMAL, HARD, HONOR, COUNT }
 
 @export var difficultyButtons: Array[DifficultyButton]
 

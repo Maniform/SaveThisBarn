@@ -33,7 +33,7 @@
 
 [node name="SceneUtils" type="Node" parent="."]
 script = ExtResource("1_aigd7")
-scenes_to_preload = Array[int]([0, 2])
+scenes_to_preload = Array[int]([0, 2, 3])
 
 [node name="AppleSortGameMode" type="Node" parent="." node_paths=PackedStringArray("apple_spawner", "apple_progress_bar", "barrel_progress_bar", "ff_apple_progress_bar", "ff_barrel_progress_bar", "elementsToShowAfterDifficulty", "times_up_sprite", "show_results_button", "celebration_spawner")]
 script = ExtResource("1_tiu3p")

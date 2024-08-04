@@ -36,7 +36,8 @@ class DifficultyValues:
 var difficultyOverrides = {
 	DifficultyChooser.Difficulty.EASY: DifficultyValues.new(0.5, 0.5),
 	DifficultyChooser.Difficulty.NORMAL: DifficultyValues.new(0.3, 0.3),
-	DifficultyChooser.Difficulty.HARD: DifficultyValues.new(0.2, 0.08)
+	DifficultyChooser.Difficulty.HARD: DifficultyValues.new(0.2, 0.08),
+	DifficultyChooser.Difficulty.HONOR: DifficultyValues.new(0.15, 0.03)
 }
 
 @onready var ff_timer:= $FFTimer as Timer
@@ -126,6 +127,8 @@ func start():
 	player_controller.input_game_mode = PlayerController.INPUT_GAME_MODE.GAME
 
 func end():
+	if difficulty == DifficultyChooser.Difficulty.COUNT - 1 and victory:
+		unlock_hard_save()
 	ff_timer.stop()
 	player_controller.input_game_mode = PlayerController.INPUT_GAME_MODE.NONE
 	main_music.stop()
@@ -146,8 +149,6 @@ func show_results():
 		lose()
 
 func win():
-	if difficulty == DifficultyChooser.Difficulty.HARD:
-		unlock_hard_save()
 	celebration_spawner.activated = true
 	sound_effect.stream = victory_sound_effect
 	sound_effect.finished.connect(victory_sound_effect_finished)
@@ -166,7 +167,7 @@ func victory_sound_effect_finished():
 func victory_music_finished():
 	main_music.finished.disconnect(victory_music_finished)
 	main_music.loop = true
-	if difficulty == DifficultyChooser.Difficulty.HARD:
+	if difficulty == DifficultyChooser.Difficulty.COUNT - 1:
 		scene_manager.goto(hard_win_scene)
 	else:
 		scene_manager.goto(win_scene)
@@ -174,11 +175,11 @@ func victory_music_finished():
 func unlock_hard_save():
 	if not FileAccess.file_exists("user://savegame.save"):
 		FileAccess.open("user://savegame.save", FileAccess.WRITE).close()
-	var saveFile = FileAccess.open("user://savegame.save", FileAccess.READ_WRITE)
+	var saveFile = FileAccess.open("user://savegame.save", FileAccess.WRITE)
 	if saveFile.is_open():
-		var saveDict = saveFile.get_var()
-		if not saveDict is Dictionary:
-			saveDict = {}
-		saveDict["HardVictory"] = true
+		var saveDict = {
+			"Version": ProjectSettings.get_setting("application/config/version", "0"),
+			"HardVictory": true
+		}
 		saveFile.store_var(saveDict)
 		saveFile.close()
