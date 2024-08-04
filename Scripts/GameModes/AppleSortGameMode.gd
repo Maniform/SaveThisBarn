@@ -19,6 +19,7 @@ class DifficultyValues:
 @export var celebration_spawner: CelebrationSpawner
 @export var times_up_sprite: Sprite2D
 @export var times_up_sound_effect: AudioStream
+@export var show_results_button: Button
 @export var victory_sound_effect: AudioStream
 @export var victory_music: AudioStream
 @export var win_scene: SceneManager.SCENE
@@ -127,8 +128,11 @@ func end():
 	sound_effect.play()
 
 func end_sound_finished():
-	times_up_sprite.visible = false
 	sound_effect.finished.disconnect(end_sound_finished)
+	show_results_button.visible = true
+
+func show_results():
+	times_up_sprite.visible = false
 	if(victory):
 		win()
 	else:

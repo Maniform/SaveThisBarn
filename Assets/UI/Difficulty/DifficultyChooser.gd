@@ -1,4 +1,4 @@
-class_name DifficultyChooser extends Control
+class_name DifficultyChooser extends CenterContainer
 
 enum Difficulty { EASY, NORMAL, HARD }
 

@@ -35,7 +35,7 @@
 script = ExtResource("1_aigd7")
 scenes_to_preload = Array[int]([0, 2])
 
-[node name="AppleSortGameMode" type="Node" parent="." node_paths=PackedStringArray("apple_spawner", "apple_progress_bar", "barrel_progress_bar", "ff_apple_progress_bar", "ff_barrel_progress_bar", "celebration_spawner", "times_up_sprite", "elementsToShowOnDifficulty")]
+[node name="AppleSortGameMode" type="Node" parent="." node_paths=PackedStringArray("apple_spawner", "apple_progress_bar", "barrel_progress_bar", "ff_apple_progress_bar", "ff_barrel_progress_bar", "celebration_spawner", "times_up_sprite", "show_results_button", "elementsToShowOnDifficulty")]
 script = ExtResource("1_tiu3p")
 apple_spawner = NodePath("../Camera2D/GrannySmith/AppleSpawner/AppleSpawners")
 apple_progress_bar = NodePath("../Camera2D/GrannySmith/GrannyInfos/AppleProgressBar/ProgressBar")
@@ -46,6 +46,7 @@ ff_apple_delay = 0.3
 celebration_spawner = NodePath("../CelebrationSpawner")
 times_up_sprite = NodePath("../Camera2D/GrannySmith/TimesUp")
 times_up_sound_effect = ExtResource("3_2v2ex")
+show_results_button = NodePath("../Camera2D/GrannySmith/TimesUp/ShowResultsButton")
 victory_sound_effect = ExtResource("2_ach2u")
 victory_music = ExtResource("3_uk75t")
 hard_win_scene = 3
@@ -184,16 +185,36 @@ visible = false
 texture = ExtResource("27_5rpbh")
 
 [node name="Label" type="Label" parent="Camera2D/GrannySmith/TimesUp"]
-offset_left = -689.0
-offset_top = 223.0
-offset_right = 117.0
-offset_bottom = 436.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -910.0
+offset_top = -803.0
+offset_right = -104.0
+offset_bottom = -590.0
+grow_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 156
 theme_override_styles/normal = ExtResource("26_uvao5")
 text = "TimesUp"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ShowResultsButton" type="Button" parent="Camera2D/GrannySmith/TimesUp"]
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1534.0
+offset_top = -735.0
+offset_right = -1010.0
+offset_bottom = -590.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 100
+text = "Results"
 
 [node name="GrannyInfos" type="ColorRect" parent="Camera2D/GrannySmith"]
 offset_left = -932.0
@@ -288,10 +309,20 @@ script = ExtResource("9_6yjfh")
 emit_value = 1
 
 [node name="DifficultyChooser" parent="Camera2D" instance=ExtResource("26_he7rp")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -403.5
+offset_top = -267.5
+offset_right = 403.5
+offset_bottom = 267.5
 
 [connection signal="animation_finished" from="Camera2D/GrannySmith" to="Camera2D/GrannySmith" method="_on_animation_finished"]
 [connection signal="apple_thrown" from="Camera2D/GrannySmith" to="Camera2D/GrannySmith/AppleSpawner/AppleSpawners" method="change"]
 [connection signal="apple_thrown_choice" from="Camera2D/GrannySmith" to="AppleSortGameMode" method="on_apple_thrown"]
+[connection signal="pressed" from="Camera2D/GrannySmith/TimesUp/ShowResultsButton" to="AppleSortGameMode" method="show_results"]
 [connection signal="pressed_direction" from="Camera2D/GrannySmith/HalfScreenButtonLeft" to="Camera2D/GrannySmith" method="select_apple"]
 [connection signal="pressed_direction" from="Camera2D/GrannySmith/HalfScreenButtonRight" to="Camera2D/GrannySmith" method="select_apple"]
 [connection signal="difficulty_selected" from="Camera2D/DifficultyChooser" to="AppleSortGameMode" method="set_difficulty"]
