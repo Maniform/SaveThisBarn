@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bmijdxt1hk5vr"]
+[gd_scene load_steps=29 format=3 uid="uid://bmijdxt1hk5vr"]
 
 [ext_resource type="Script" path="res://Scripts/Scenes/SceneUtils.gd" id="1_aigd7"]
 [ext_resource type="Script" path="res://Scripts/CelebrationSpawner.gd" id="1_rf7lk"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Sprites/AppleSort/GrannySmith.gd" id="2_p0nb0"]
 [ext_resource type="Texture2D" uid="uid://ek4csiccdfmb" path="res://Sprites/Celebration/Apple/AJ_Happy0.png" id="2_tc2ww"]
 [ext_resource type="Texture2D" uid="uid://c5dgxoxwf0yv0" path="res://Sprites/Celebration/Apple/AJ_Happy1.png" id="3_0bqqh"]
+[ext_resource type="AudioStream" uid="uid://bcnmellcxb3iq" path="res://Sounds/GrannySmith/TimesUp-en.wav" id="3_2v2ex"]
 [ext_resource type="AudioStream" uid="uid://dpt8pqeviu524" path="res://Sounds/GrannySmith/GS_Good_en.wav" id="3_305wk"]
 [ext_resource type="AudioStream" uid="uid://dncivd12tpj46" path="res://Sounds/Music/Cupcakes (8-bit).wav" id="3_uk75t"]
 [ext_resource type="AudioStream" uid="uid://sfbc8v7n8yoi" path="res://Sounds/GrannySmith/GS_Bad_en.wav" id="4_0h7t7"]
@@ -26,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://c22mf5xbdssfn" path="res://Sprites/FlimAndFlam.png" id="22_1qdr4"]
 [ext_resource type="PackedScene" uid="uid://bkxcyrvwq7wyk" path="res://Assets/UI/Difficulty/difficulty_chooser.tscn" id="26_he7rp"]
 [ext_resource type="StyleBox" uid="uid://dkx8xm0iph64a" path="res://Styles/AndroidAppleControlsStyle.tres" id="26_uvao5"]
+[ext_resource type="Texture2D" uid="uid://dn1dadm2sb3u6" path="res://Sprites/AppleSort/TimesUp.png" id="27_5rpbh"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -33,7 +35,7 @@
 script = ExtResource("1_aigd7")
 scenes_to_preload = Array[int]([0, 2])
 
-[node name="AppleSortGameMode" type="Node" parent="." node_paths=PackedStringArray("apple_spawner", "apple_progress_bar", "barrel_progress_bar", "ff_apple_progress_bar", "ff_barrel_progress_bar", "celebration_spawner", "elementsToShowOnDifficulty")]
+[node name="AppleSortGameMode" type="Node" parent="." node_paths=PackedStringArray("apple_spawner", "apple_progress_bar", "barrel_progress_bar", "ff_apple_progress_bar", "ff_barrel_progress_bar", "celebration_spawner", "times_up_sprite", "elementsToShowOnDifficulty")]
 script = ExtResource("1_tiu3p")
 apple_spawner = NodePath("../Camera2D/GrannySmith/AppleSpawner/AppleSpawners")
 apple_progress_bar = NodePath("../Camera2D/GrannySmith/GrannyInfos/AppleProgressBar/ProgressBar")
@@ -42,11 +44,13 @@ ff_apple_progress_bar = NodePath("../Camera2D/GrannySmith/FFInfos/FFAppleProgres
 ff_barrel_progress_bar = NodePath("../Camera2D/GrannySmith/FFInfos/FFBarrelProgressBar/ProgressBar")
 ff_apple_delay = 0.3
 celebration_spawner = NodePath("../CelebrationSpawner")
+times_up_sprite = NodePath("../Camera2D/GrannySmith/TimesUp")
+times_up_sound_effect = ExtResource("3_2v2ex")
 victory_sound_effect = ExtResource("2_ach2u")
 victory_music = ExtResource("3_uk75t")
 hard_win_scene = 3
 lose_scene = 2
-elementsToShowOnDifficulty = [NodePath("../Camera2D/GrannySmith/GrannyInfos"), NodePath("../Camera2D/GrannySmith/FFInfos"), NodePath("../Camera2D/GrannySmith/Directions/Good"), NodePath("../Camera2D/GrannySmith/Directions/Bad"), NodePath("../Camera2D/GrannySmith/AppleSpawner")]
+elementsToShowOnDifficulty = [NodePath("../Camera2D/GrannySmith/GrannyInfos"), NodePath("../Camera2D/GrannySmith/FFInfos"), NodePath("../Camera2D/GrannySmith/AppleSpawner/Directions/Good"), NodePath("../Camera2D/GrannySmith/AppleSpawner/Directions/Bad"), NodePath("../Camera2D/GrannySmith/AppleSpawner")]
 
 [node name="FFTimer" type="Timer" parent="AppleSortGameMode"]
 
@@ -102,6 +106,50 @@ offset_right = 88.0
 offset_bottom = 490.0
 color = Color(1, 1, 1, 0.431373)
 
+[node name="Directions" type="Node2D" parent="Camera2D/GrannySmith/AppleSpawner"]
+position = Vector2(688, -307)
+
+[node name="Good" type="Label" parent="Camera2D/GrannySmith/AppleSpawner/Directions"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 454.0
+offset_top = -30.0
+offset_right = 920.0
+offset_bottom = 176.0
+grow_horizontal = 0
+grow_vertical = 2
+rotation = -0.211185
+pivot_offset = Vector2(233, 103)
+theme_override_colors/font_color = Color(0, 0.517593, 3.85046e-07, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+theme_override_styles/normal = ExtResource("26_uvao5")
+text = "GoodA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Bad" type="Label" parent="Camera2D/GrannySmith/AppleSpawner/Directions"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -920.0
+offset_top = -30.0
+offset_right = -454.0
+offset_bottom = 176.0
+grow_vertical = 2
+rotation = 0.211185
+pivot_offset = Vector2(233, 103)
+theme_override_colors/font_color = Color(1, 0.116114, 0.146929, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+theme_override_styles/normal = ExtResource("26_uvao5")
+text = "BadA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="AppleSpawners" type="Node2D" parent="Camera2D/GrannySmith/AppleSpawner"]
 position = Vector2(688, 87)
 script = ExtResource("6_j6mm1")
@@ -130,6 +178,22 @@ scale = Vector2(0.5, 0.5)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Camera2D/GrannySmith"]
 bus = &"Effects"
+
+[node name="TimesUp" type="Sprite2D" parent="Camera2D/GrannySmith"]
+visible = false
+texture = ExtResource("27_5rpbh")
+
+[node name="Label" type="Label" parent="Camera2D/GrannySmith/TimesUp"]
+offset_left = -689.0
+offset_top = 223.0
+offset_right = 117.0
+offset_bottom = 436.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 156
+theme_override_styles/normal = ExtResource("26_uvao5")
+text = "TimesUp"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="GrannyInfos" type="ColorRect" parent="Camera2D/GrannySmith"]
 offset_left = -932.0
@@ -222,49 +286,6 @@ position = Vector2(480, 0)
 shape = ExtResource("8_7h2g3")
 script = ExtResource("9_6yjfh")
 emit_value = 1
-
-[node name="Directions" type="Node2D" parent="Camera2D/GrannySmith"]
-
-[node name="Good" type="Label" parent="Camera2D/GrannySmith/Directions"]
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 454.0
-offset_top = -30.0
-offset_right = 920.0
-offset_bottom = 176.0
-grow_horizontal = 0
-grow_vertical = 2
-rotation = -0.211185
-pivot_offset = Vector2(233, 103)
-theme_override_colors/font_color = Color(0, 0.517593, 3.85046e-07, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 100
-theme_override_styles/normal = ExtResource("26_uvao5")
-text = "GoodA"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Bad" type="Label" parent="Camera2D/GrannySmith/Directions"]
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = -920.0
-offset_top = -30.0
-offset_right = -454.0
-offset_bottom = 176.0
-grow_vertical = 2
-rotation = 0.211185
-pivot_offset = Vector2(233, 103)
-theme_override_colors/font_color = Color(1, 0.116114, 0.146929, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 100
-theme_override_styles/normal = ExtResource("26_uvao5")
-text = "BadA"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="DifficultyChooser" parent="Camera2D" instance=ExtResource("26_he7rp")]
 

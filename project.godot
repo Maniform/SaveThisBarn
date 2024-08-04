@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Save This Barn"
-config/version="0.4"
+config/version="0.3.2"
 run/main_scene="res://Scenes/MainMenu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://Sprites/MainMenu/Icon.png"
@@ -42,7 +42,8 @@ locale/translation_remaps={
 "res://Sounds/GrannySmith/AJ-3_en.wav": PackedStringArray("res://Sounds/GrannySmith/AJ-3_fr.wav:fr"),
 "res://Sounds/GrannySmith/AJ-4_en.wav": PackedStringArray("res://Sounds/GrannySmith/AJ-4_fr.wav:fr"),
 "res://Sounds/GrannySmith/GS_Bad_en.wav": PackedStringArray("res://Sounds/GrannySmith/GS_Bad_fr.wav:fr"),
-"res://Sounds/GrannySmith/GS_Good_en.wav": PackedStringArray("res://Sounds/GrannySmith/GS_Good_fr.wav:fr")
+"res://Sounds/GrannySmith/GS_Good_en.wav": PackedStringArray("res://Sounds/GrannySmith/GS_Good_fr.wav:fr"),
+"res://Sounds/GrannySmith/TimesUp-en.wav": PackedStringArray("res://Sounds/GrannySmith/TimesUp-fr.wav:fr")
 }
 locale/translations=PackedStringArray("res://Translations/Translations.en.translation", "res://Translations/Translations.fr.translation")
 locale/locale_filter_mode=0

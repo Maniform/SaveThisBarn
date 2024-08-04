@@ -17,6 +17,8 @@ class DifficultyValues:
 @export var ff_barrel_progress_bar: ProgressBar
 @export var ff_apple_delay:= 1 as float
 @export var celebration_spawner: CelebrationSpawner
+@export var times_up_sprite: Sprite2D
+@export var times_up_sound_effect: AudioStream
 @export var victory_sound_effect: AudioStream
 @export var victory_music: AudioStream
 @export var win_scene: SceneManager.SCENE
@@ -39,6 +41,7 @@ var ff_apples:= 0 as int
 var ff_barrels:= 0 as int
 
 var difficulty:= DifficultyChooser.Difficulty.NORMAL
+var victory:= false as bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -76,7 +79,8 @@ func add_apple(number:= 1 as int):
 		barrels += 1
 		barrel_progress_bar.value = barrels
 		if barrels == barrels_objective:
-			win()
+			victory = true
+			end()
 	apple_progress_bar.value = apples
 
 func remove_apple(number:= 1 as int):
@@ -92,7 +96,7 @@ func add_ff_apple(number:= 1 as int):
 			ff_apples -= apple_per_barrel
 			ff_barrel_progress_bar.value = ff_barrels
 			if ff_barrels == barrels_objective:
-				lose()
+				end()
 	ff_apple_progress_bar.value = ff_apples
 
 func set_difficulty(_difficulty: DifficultyChooser.Difficulty):
@@ -113,20 +117,32 @@ func start():
 	ff_timer.start(ff_apple_delay)
 	player_controller.input_game_mode = PlayerController.INPUT_GAME_MODE.GAME
 
+func end():
+	ff_timer.stop()
+	player_controller.input_game_mode = PlayerController.INPUT_GAME_MODE.NONE
+	main_music.stop()
+	times_up_sprite.visible = true
+	sound_effect.stream = times_up_sound_effect
+	sound_effect.finished.connect(end_sound_finished)
+	sound_effect.play()
+
+func end_sound_finished():
+	times_up_sprite.visible = false
+	sound_effect.finished.disconnect(end_sound_finished)
+	if(victory):
+		win()
+	else:
+		lose()
+
 func win():
 	if difficulty == DifficultyChooser.Difficulty.HARD:
 		unlock_hard_save()
-	ff_timer.stop()
-	player_controller.input_game_mode = PlayerController.INPUT_GAME_MODE.NONE
 	celebration_spawner.activated = true
-	main_music.stop()
 	sound_effect.stream = victory_sound_effect
 	sound_effect.finished.connect(victory_sound_effect_finished)
 	sound_effect.play()
 
 func lose():
-	ff_timer.stop()
-	player_controller.input_game_mode = PlayerController.INPUT_GAME_MODE.NONE
 	scene_manager.goto(lose_scene)
 
 func victory_sound_effect_finished():
