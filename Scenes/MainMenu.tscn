@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://ymik4ne2syov"]
+[gd_scene load_steps=21 format=3 uid="uid://ymik4ne2syov"]
 
 [ext_resource type="Script" path="res://Scripts/HardWinButtonManager.gd" id="1_1tj7e"]
 [ext_resource type="Script" path="res://Scripts/Scenes/SceneUtils.gd" id="1_axkvy"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://ornekx1e255q" path="res://Assets/UI/windows_settings.tscn" id="13_gst54"]
 [ext_resource type="PackedScene" uid="uid://cnucwa0vglkc2" path="res://Assets/UI/android_settings.tscn" id="14_qs56e"]
 [ext_resource type="Script" path="res://Scripts/UI/GoToSceneButton.gd" id="18_s4rs3"]
+[ext_resource type="Script" path="res://Scripts/UI/BuildVersionLabel.gd" id="20_284k2"]
 
 [node name="MainMenu" type="Node2D"]
 
@@ -202,6 +203,25 @@ theme_override_font_sizes/font_size = 50
 text = "HardWinButton"
 script = ExtResource("18_s4rs3")
 scene = 3
+
+[node name="ProjectVersionLabel" type="Label" parent="Camera2D/MainMenuSprite"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1082.0
+offset_top = -587.0
+offset_right = -960.0
+offset_bottom = -540.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "version"
+horizontal_alignment = 2
+vertical_alignment = 2
+script = ExtResource("20_284k2")
 
 [connection signal="pressed" from="Camera2D/MainMenuSprite/StartButtonWorker" to="Camera2D/MainMenuSprite/StartButtonWorker" method="on_pressed"]
 [connection signal="pressed" from="Camera2D/MainMenuSprite/SettingsButton" to="Camera2D/MainMenuSprite/SettingsButton" method="on_pressed"]
