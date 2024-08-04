@@ -17,7 +17,6 @@ scenes_to_preload = Array[int]([0])
 [node name="MainMusicPlayer" type="Node" parent="."]
 script = ExtResource("2_67tvi")
 stream = ExtResource("3_nnr5d")
-volume = 10.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
