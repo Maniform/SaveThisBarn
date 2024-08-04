@@ -20,6 +20,7 @@ class DifficultyValues:
 @export var victory_sound_effect: AudioStream
 @export var victory_music: AudioStream
 @export var win_scene: SceneManager.SCENE
+@export var hard_win_scene: SceneManager.SCENE
 @export var lose_scene: SceneManager.SCENE
 
 @export var elementsToShowOnDifficulty: Array[Control]
@@ -36,6 +37,8 @@ var apples:= 0 as int
 var barrels:= 0 as int
 var ff_apples:= 0 as int
 var ff_barrels:= 0 as int
+
+var difficulty:= DifficultyChooser.Difficulty.NORMAL
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -92,7 +95,9 @@ func add_ff_apple(number:= 1 as int):
 				lose()
 	ff_apple_progress_bar.value = ff_apples
 
-func set_difficulty(difficulty: DifficultyChooser.Difficulty):
+func set_difficulty(_difficulty: DifficultyChooser.Difficulty):
+	difficulty = _difficulty
+	
 	for elem in elementsToShowOnDifficulty:
 		elem.visible = true
 	
@@ -109,6 +114,8 @@ func start():
 	player_controller.input_game_mode = PlayerController.INPUT_GAME_MODE.GAME
 
 func win():
+	if difficulty == DifficultyChooser.Difficulty.HARD:
+		unlock_hard_save()
 	ff_timer.stop()
 	player_controller.input_game_mode = PlayerController.INPUT_GAME_MODE.NONE
 	celebration_spawner.activated = true
@@ -132,4 +139,19 @@ func victory_sound_effect_finished():
 func victory_music_finished():
 	main_music.finished.disconnect(victory_music_finished)
 	main_music.loop = true
-	scene_manager.goto(win_scene)
+	if difficulty == DifficultyChooser.Difficulty.HARD:
+		scene_manager.goto(hard_win_scene)
+	else:
+		scene_manager.goto(win_scene)
+
+func unlock_hard_save():
+	if not FileAccess.file_exists("user://savegame.save"):
+		FileAccess.open("user://savegame.save", FileAccess.WRITE).close()
+	var saveFile = FileAccess.open("user://savegame.save", FileAccess.READ_WRITE)
+	if saveFile.is_open():
+		var saveDict = saveFile.get_var()
+		if not saveDict is Dictionary:
+			saveDict = {}
+		saveDict["HardVictory"] = true
+		saveFile.store_var(saveDict)
+		saveFile.close()

@@ -1,5 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://ymik4ne2syov"]
+[gd_scene load_steps=20 format=3 uid="uid://ymik4ne2syov"]
 
+[ext_resource type="Script" path="res://Scripts/HardWinButtonManager.gd" id="1_1tj7e"]
 [ext_resource type="Script" path="res://Scripts/Scenes/SceneUtils.gd" id="1_axkvy"]
 [ext_resource type="Texture2D" uid="uid://dsia6qysqojq0" path="res://Sprites/MainMenu/Intro.png" id="1_jqn87"]
 [ext_resource type="Script" path="res://Scripts/Music/MainMusicPlayer.gd" id="1_l3w6x"]
@@ -17,6 +18,7 @@
 [ext_resource type="Script" path="res://Scripts/PlatformAssetSelector.gd" id="13_4dxo4"]
 [ext_resource type="PackedScene" uid="uid://ornekx1e255q" path="res://Assets/UI/windows_settings.tscn" id="13_gst54"]
 [ext_resource type="PackedScene" uid="uid://cnucwa0vglkc2" path="res://Assets/UI/android_settings.tscn" id="14_qs56e"]
+[ext_resource type="Script" path="res://Scripts/UI/GoToSceneButton.gd" id="18_s4rs3"]
 
 [node name="MainMenu" type="Node2D"]
 
@@ -27,6 +29,10 @@ scenes_to_preload = Array[int]([1])
 [node name="MainMusicPlayer" type="Node" parent="."]
 script = ExtResource("1_l3w6x")
 stream = ExtResource("2_k3q1u")
+
+[node name="HardWinButtonManager" type="Node" parent="." node_paths=PackedStringArray("hardWinButton")]
+script = ExtResource("1_1tj7e")
+hardWinButton = NodePath("../Camera2D/MainMenuSprite/HardWinButton")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -39,7 +45,8 @@ position = Vector2(-692, -180)
 scale = Vector2(0.371296, 0.371296)
 texture = ExtResource("10_4pxji")
 
-[node name="StartButton" type="Button" parent="Camera2D/MainMenuSprite" node_paths=PackedStringArray("nodes_to_hide", "submenu_to_open")]
+[node name="StartButtonWorker" type="Button" parent="Camera2D/MainMenuSprite" node_paths=PackedStringArray("nodes_to_hide", "submenu_to_open")]
+visible = false
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -57,6 +64,24 @@ text = "StartGame"
 script = ExtResource("4_rcjdj")
 nodes_to_hide = [NodePath("."), NodePath("../SettingsButton"), NodePath("../QuitButton")]
 submenu_to_open = NodePath("../Workers")
+
+[node name="StartButton" type="Button" parent="Camera2D/MainMenuSprite"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -540.0
+offset_top = -1008.0
+offset_right = -60.0
+offset_bottom = -864.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(240, 72)
+theme_override_font_sizes/font_size = 50
+text = "StartGame"
+script = ExtResource("18_s4rs3")
+scene = 1
 
 [node name="SettingsButton" type="Button" parent="Camera2D/MainMenuSprite" node_paths=PackedStringArray("nodes_to_hide", "submenu_to_open")]
 anchors_preset = 7
@@ -166,7 +191,19 @@ theme_override_font_sizes/font_size = 50
 text = "Back"
 script = ExtResource("5_abq7c")
 
-[connection signal="pressed" from="Camera2D/MainMenuSprite/StartButton" to="Camera2D/MainMenuSprite/StartButton" method="on_pressed"]
+[node name="HardWinButton" type="Button" parent="Camera2D/MainMenuSprite"]
+visible = false
+offset_left = -900.0
+offset_top = 386.0
+offset_right = -420.0
+offset_bottom = 530.0
+pivot_offset = Vector2(240, 72)
+theme_override_font_sizes/font_size = 50
+text = "HardWinButton"
+script = ExtResource("18_s4rs3")
+scene = 3
+
+[connection signal="pressed" from="Camera2D/MainMenuSprite/StartButtonWorker" to="Camera2D/MainMenuSprite/StartButtonWorker" method="on_pressed"]
 [connection signal="pressed" from="Camera2D/MainMenuSprite/SettingsButton" to="Camera2D/MainMenuSprite/SettingsButton" method="on_pressed"]
 [connection signal="pressed" from="Camera2D/MainMenuSprite/QuitButton" to="Camera2D/MainMenuSprite/QuitButton" method="_on_pressed"]
 [connection signal="pressed" from="Camera2D/MainMenuSprite/Workers/BackWorkersButton" to="Camera2D/MainMenuSprite/Workers" method="close"]

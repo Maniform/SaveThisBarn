@@ -1,11 +1,12 @@
 class_name SceneManager extends Node
 
-enum SCENE {MAIN_MENU, GRANNY_SMITH, LOSE}
+enum SCENE {MAIN_MENU, GRANNY_SMITH, LOSE, HARD_WIN}
 
 var scenes = [
 	"res://Scenes/MainMenu.tscn",
 	"res://Scenes/GrannySmith.tscn",
-	"res://Scenes/Lose.tscn"
+	"res://Scenes/Lose.tscn",
+	"res://Scenes/HardVictory.tscn"
 ] as Array[StringName]
 
 # Called when the node enters the scene tree for the first time.

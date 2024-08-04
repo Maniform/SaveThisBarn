@@ -25,9 +25,9 @@ texture = ExtResource("1_4sc2a")
 script = ExtResource("4_vcbjs")
 
 [node name="Label" type="Label" parent="Camera2D/Sprite2D"]
-offset_left = 297.0
+offset_left = 165.0
 offset_top = -513.0
-offset_right = 750.0
+offset_right = 912.0
 offset_bottom = -376.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 100

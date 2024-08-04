@@ -44,6 +44,7 @@ ff_apple_delay = 0.3
 celebration_spawner = NodePath("../CelebrationSpawner")
 victory_sound_effect = ExtResource("2_ach2u")
 victory_music = ExtResource("3_uk75t")
+hard_win_scene = 3
 lose_scene = 2
 elementsToShowOnDifficulty = [NodePath("../Camera2D/GrannySmith/GrannyInfos"), NodePath("../Camera2D/GrannySmith/FFInfos"), NodePath("../Camera2D/GrannySmith/Directions/Good"), NodePath("../Camera2D/GrannySmith/Directions/Bad"), NodePath("../Camera2D/GrannySmith/AppleSpawner")]
 
