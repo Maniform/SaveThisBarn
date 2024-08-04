@@ -32,7 +32,7 @@ stream = ExtResource("2_k3q1u")
 
 [node name="HardWinButtonManager" type="Node" parent="." node_paths=PackedStringArray("hardWinButton")]
 script = ExtResource("1_1tj7e")
-hardWinButton = NodePath("../Camera2D/MainMenuSprite/HardWinButton")
+hardWinButton = NodePath("../Camera2D/MainMenuSprite/HardWinButtonParent/HardWinButton")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -47,16 +47,16 @@ texture = ExtResource("10_4pxji")
 
 [node name="StartButtonWorker" type="Button" parent="Camera2D/MainMenuSprite" node_paths=PackedStringArray("nodes_to_hide", "submenu_to_open")]
 visible = false
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -540.0
-offset_top = -1008.0
-offset_right = -60.0
-offset_bottom = -864.0
-grow_horizontal = 2
+offset_left = -1490.0
+offset_top = -1062.0
+offset_right = -1010.0
+offset_bottom = -918.0
+grow_horizontal = 0
 grow_vertical = 0
 pivot_offset = Vector2(240, 72)
 theme_override_font_sizes/font_size = 50
@@ -66,16 +66,16 @@ nodes_to_hide = [NodePath("."), NodePath("../SettingsButton"), NodePath("../Quit
 submenu_to_open = NodePath("../Workers")
 
 [node name="StartButton" type="Button" parent="Camera2D/MainMenuSprite"]
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -540.0
-offset_top = -1008.0
-offset_right = -60.0
-offset_bottom = -864.0
-grow_horizontal = 2
+offset_left = -1490.0
+offset_top = -1062.0
+offset_right = -1010.0
+offset_bottom = -918.0
+grow_horizontal = 0
 grow_vertical = 0
 pivot_offset = Vector2(240, 72)
 theme_override_font_sizes/font_size = 50
@@ -84,35 +84,35 @@ script = ExtResource("18_s4rs3")
 scene = 1
 
 [node name="SettingsButton" type="Button" parent="Camera2D/MainMenuSprite" node_paths=PackedStringArray("nodes_to_hide", "submenu_to_open")]
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -540.0
-offset_top = -854.0
-offset_right = -60.0
-offset_bottom = -710.0
-grow_horizontal = 2
+offset_left = -1490.0
+offset_top = -898.0
+offset_right = -1010.0
+offset_bottom = -754.0
+grow_horizontal = 0
 grow_vertical = 0
 pivot_offset = Vector2(240, 72)
 theme_override_font_sizes/font_size = 50
 text = "Settings"
 script = ExtResource("4_rcjdj")
-nodes_to_hide = [NodePath("../StartButton"), NodePath("."), NodePath("../QuitButton")]
+nodes_to_hide = [NodePath("../StartButton"), NodePath("."), NodePath("../QuitButton"), NodePath("../HardWinButtonParent")]
 submenu_to_open = NodePath("../PlatformAssetSelector")
 
 [node name="QuitButton" type="Button" parent="Camera2D/MainMenuSprite"]
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -540.0
-offset_top = -694.0
-offset_right = -60.0
-offset_bottom = -550.0
-grow_horizontal = 2
+offset_left = -1490.0
+offset_top = -734.0
+offset_right = -1010.0
+offset_bottom = -590.0
+grow_horizontal = 0
 grow_vertical = 0
 pivot_offset = Vector2(240, 72)
 theme_override_font_sizes/font_size = 50
@@ -146,17 +146,10 @@ script = ExtResource("5_kex6g")
 scene = 1
 
 [node name="BackWorkersButton" type="Button" parent="Camera2D/MainMenuSprite/Workers"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 1380.0
-offset_top = 926.0
-offset_right = 1860.0
-offset_bottom = 1070.0
-grow_horizontal = 2
-grow_vertical = 0
+offset_left = 1390.0
+offset_top = 886.0
+offset_right = 1870.0
+offset_bottom = 1030.0
 pivot_offset = Vector2(240, 72)
 theme_override_font_sizes/font_size = 50
 text = "Back"
@@ -175,28 +168,35 @@ position = Vector2(-960, -540)
 position = Vector2(-960, -540)
 
 [node name="BackSettingsButton" type="Button" parent="Camera2D/MainMenuSprite/PlatformAssetSelector"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 420.0
-offset_top = 386.0
-offset_right = 900.0
-offset_bottom = 530.0
-grow_horizontal = 2
-grow_vertical = 0
+offset_left = 430.0
+offset_top = 346.0
+offset_right = 910.0
+offset_bottom = 490.0
 pivot_offset = Vector2(240, 72)
 theme_override_font_sizes/font_size = 50
 text = "Back"
 script = ExtResource("5_abq7c")
 
-[node name="HardWinButton" type="Button" parent="Camera2D/MainMenuSprite"]
+[node name="HardWinButtonParent" type="Control" parent="Camera2D/MainMenuSprite"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -910.0
+offset_top = -590.0
+offset_right = -910.0
+offset_bottom = -590.0
+grow_vertical = 0
+
+[node name="HardWinButton" type="Button" parent="Camera2D/MainMenuSprite/HardWinButtonParent"]
 visible = false
-offset_left = -900.0
-offset_top = 386.0
-offset_right = -420.0
-offset_bottom = 530.0
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -144.0
+offset_right = 480.0
+grow_vertical = 0
 pivot_offset = Vector2(240, 72)
 theme_override_font_sizes/font_size = 50
 text = "HardWinButton"

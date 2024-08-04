@@ -8,25 +8,31 @@ class DifficultyValues:
 		ff_apple_delay = _ff_apple_delay
 		celebration_spawner_delay = _celebration_spawner_delay
 
-@export var barrels_objective:= 5 as int
-@export var apple_per_barrel:= 10 as int
+@export_category("UI assets")
+@export_group("Apples")
 @export var apple_spawner: AppleSpawner
 @export var apple_progress_bar: ProgressBar
 @export var barrel_progress_bar: ProgressBar
+@export_group("Flim and Flam")
 @export var ff_apple_progress_bar: ProgressBar
 @export var ff_barrel_progress_bar: ProgressBar
-@export var ff_apple_delay:= 1 as float
-@export var celebration_spawner: CelebrationSpawner
+@export_category("Objectives")
+@export var barrels_objective:= 5 as int
+@export var apple_per_barrel:= 10 as int
+@export var elementsToShowAfterDifficulty: Array[Control]
+@export_category("Time's up")
 @export var times_up_sprite: Sprite2D
 @export var times_up_sound_effect: AudioStream
 @export var show_results_button: Button
+@export_category("Victory")
 @export var victory_sound_effect: AudioStream
 @export var victory_music: AudioStream
+@export var celebration_spawner: CelebrationSpawner
+@export_category("End scenes")
 @export var win_scene: SceneManager.SCENE
 @export var hard_win_scene: SceneManager.SCENE
 @export var lose_scene: SceneManager.SCENE
 
-@export var elementsToShowOnDifficulty: Array[Control]
 var difficultyOverrides = {
 	DifficultyChooser.Difficulty.EASY: DifficultyValues.new(0.5, 0.5),
 	DifficultyChooser.Difficulty.NORMAL: DifficultyValues.new(0.3, 0.3),
@@ -41,6 +47,7 @@ var barrels:= 0 as int
 var ff_apples:= 0 as int
 var ff_barrels:= 0 as int
 
+var ff_apple_delay:= 0.3 as float
 var difficulty:= DifficultyChooser.Difficulty.NORMAL
 var victory:= false as bool
 
@@ -59,7 +66,7 @@ func _ready():
 	ff_timer.timeout.connect(add_ff_apple)
 	countdown.finished.connect(start)
 	
-	for elem in elementsToShowOnDifficulty:
+	for elem in elementsToShowAfterDifficulty:
 		elem.visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -103,7 +110,7 @@ func add_ff_apple(number:= 1 as int):
 func set_difficulty(_difficulty: DifficultyChooser.Difficulty):
 	difficulty = _difficulty
 	
-	for elem in elementsToShowOnDifficulty:
+	for elem in elementsToShowAfterDifficulty:
 		elem.visible = true
 	
 	ff_apple_delay = difficultyOverrides[difficulty].ff_apple_delay

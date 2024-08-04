@@ -35,23 +35,22 @@
 script = ExtResource("1_aigd7")
 scenes_to_preload = Array[int]([0, 2])
 
-[node name="AppleSortGameMode" type="Node" parent="." node_paths=PackedStringArray("apple_spawner", "apple_progress_bar", "barrel_progress_bar", "ff_apple_progress_bar", "ff_barrel_progress_bar", "celebration_spawner", "times_up_sprite", "show_results_button", "elementsToShowOnDifficulty")]
+[node name="AppleSortGameMode" type="Node" parent="." node_paths=PackedStringArray("apple_spawner", "apple_progress_bar", "barrel_progress_bar", "ff_apple_progress_bar", "ff_barrel_progress_bar", "elementsToShowAfterDifficulty", "times_up_sprite", "show_results_button", "celebration_spawner")]
 script = ExtResource("1_tiu3p")
 apple_spawner = NodePath("../Camera2D/GrannySmith/AppleSpawner/AppleSpawners")
 apple_progress_bar = NodePath("../Camera2D/GrannySmith/GrannyInfos/AppleProgressBar/ProgressBar")
 barrel_progress_bar = NodePath("../Camera2D/GrannySmith/GrannyInfos/BarrelProgressBar/ProgressBar")
 ff_apple_progress_bar = NodePath("../Camera2D/GrannySmith/FFInfos/FFAppleProgressBar/ProgressBar")
 ff_barrel_progress_bar = NodePath("../Camera2D/GrannySmith/FFInfos/FFBarrelProgressBar/ProgressBar")
-ff_apple_delay = 0.3
-celebration_spawner = NodePath("../CelebrationSpawner")
+elementsToShowAfterDifficulty = [NodePath("../Camera2D/GrannySmith/AppleSpawner"), NodePath("../Camera2D/GrannySmith/GrannyInfos"), NodePath("../Camera2D/GrannySmith/FFInfos")]
 times_up_sprite = NodePath("../Camera2D/GrannySmith/TimesUp")
 times_up_sound_effect = ExtResource("3_2v2ex")
 show_results_button = NodePath("../Camera2D/GrannySmith/TimesUp/ShowResultsButton")
 victory_sound_effect = ExtResource("2_ach2u")
 victory_music = ExtResource("3_uk75t")
+celebration_spawner = NodePath("../CelebrationSpawner")
 hard_win_scene = 3
 lose_scene = 2
-elementsToShowOnDifficulty = [NodePath("../Camera2D/GrannySmith/GrannyInfos"), NodePath("../Camera2D/GrannySmith/FFInfos"), NodePath("../Camera2D/GrannySmith/AppleSpawner/Directions/Good"), NodePath("../Camera2D/GrannySmith/AppleSpawner/Directions/Bad"), NodePath("../Camera2D/GrannySmith/AppleSpawner")]
 
 [node name="FFTimer" type="Timer" parent="AppleSortGameMode"]
 
