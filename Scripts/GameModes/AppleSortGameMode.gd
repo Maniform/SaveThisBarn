@@ -16,6 +16,10 @@ class DifficultyValues:
 @export_group("Flim and Flam")
 @export var ff_apple_progress_bar: ProgressBar
 @export var ff_barrel_progress_bar: ProgressBar
+@export_group("End")
+@export var time_label: Control
+@export var time_label_value: Label
+@export var finish_button: Button
 @export_category("Objectives")
 @export var barrels_objective:= 5 as int
 @export var apple_per_barrel:= 10 as int
@@ -49,6 +53,7 @@ var ff_apples:= 0 as int
 var ff_barrels:= 0 as int
 
 var ff_apple_delay:= 0.3 as float
+var elapsed_time:= 0 as float
 var difficulty:= DifficultyChooser.Difficulty.NORMAL
 var victory:= false as bool
 
@@ -125,8 +130,10 @@ func start():
 	countdown.queue_free()
 	ff_timer.start(ff_apple_delay)
 	player_controller.input_game_mode = PlayerController.INPUT_GAME_MODE.GAME
+	elapsed_time = Time.get_ticks_msec()
 
 func end():
+	elapsed_time = Time.get_ticks_msec() - elapsed_time
 	if difficulty == DifficultyChooser.Difficulty.COUNT - 1 and victory:
 		unlock_hard_save()
 	ff_timer.stop()
@@ -153,6 +160,8 @@ func win():
 	sound_effect.stream = victory_sound_effect
 	sound_effect.finished.connect(victory_sound_effect_finished)
 	sound_effect.play()
+	time_label_value.text = str(elapsed_time / 1000) + " s"
+	time_label.visible = true
 
 func lose():
 	scene_manager.goto(lose_scene)
@@ -160,12 +169,17 @@ func lose():
 func victory_sound_effect_finished():
 	sound_effect.finished.disconnect(victory_sound_effect_finished)
 	main_music.stream = victory_music
-	main_music.loop = false
+	main_music.loop = true
 	main_music.finished.connect(victory_music_finished)
 	main_music.play()
 
 func victory_music_finished():
 	main_music.finished.disconnect(victory_music_finished)
+	celebration_spawner.activated = false
+	finish_button.visible = true
+	finish_button.pressed.connect(next_scene)
+
+func next_scene():
 	main_music.loop = true
 	if difficulty == DifficultyChooser.Difficulty.COUNT - 1:
 		scene_manager.goto(hard_win_scene)

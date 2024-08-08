@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dhxw54wc05fb7" path="res://Sprites/AppleSort/HardVictory.png" id="4_788ib"]
 [ext_resource type="Script" path="res://Scripts/Sprite2DViewportScaler.gd" id="5_raaso"]
 [ext_resource type="Script" path="res://Scripts/UI/GoToSceneButton.gd" id="6_27jcy"]
-[ext_resource type="StyleBox" uid="uid://dkx8xm0iph64a" path="res://Styles/AndroidAppleControlsStyle.tres" id="7_100cb"]
+[ext_resource type="StyleBox" path="res://Styles/AndroidAppleControlsStyle.tres" id="7_100cb"]
 
 [node name="HardCertificate" type="Node2D"]
 
